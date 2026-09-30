@@ -63,10 +63,10 @@ class Application:
     @staticmethod
     def connect_wifi():
         'Function: Connects to WiFi'
-        log("connecting to Wi-Fi SSID: " + "Timothy iPhone")
+        log("connecting to Wi-Fi SSID: " + WIFI_SSID)
         station = network.WLAN(network.STA_IF)
         station.active(True)
-        station.connect("Timothy iPhone", "Hemligt00")
+        station.connect(WIFI_SSID, WIFI_PASSWORD)
         started = time.ticks_ms()
         while (not station.isconnected() and
                time.ticks_diff(time.ticks_ms(), started) < 15_000):

@@ -43,7 +43,7 @@ class Application:
 
         self.tile1_label = lv.label(self.tile1)
 
-        self.tile1_label.set_text("Project Blekingetrafiken by Group 3. Version: 1.1")
+        self.tile1_label.set_text("Project Blekingetrafiken by Group 3." "\n",  "Version: 1.1")
 
         self.tile1_label.set_style_text_font(lv.font_montserrat_28, 0)
         self.tile1_label.center()

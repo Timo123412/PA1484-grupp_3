@@ -42,11 +42,10 @@ class Application:
         self.tile2 = self.tileview.add_tile(1, 0, lv.DIR.LEFT)
 
         self.tile1_label = lv.label(self.tile1)
-<<<<<<< HEAD
+
         self.tile1_label.set_text("Grouo 03")
-=======
         self.tile1_label.set_text("Hello Students we are group 3")
->>>>>>> c2d0ba9e4c1ce85b4bbd456d340d0b9d37ffa8b7
+
         self.tile1_label.set_style_text_font(lv.font_montserrat_28, 0)
         self.tile1_label.center()
         self.apply_tile_colors(self.tile1, self.tile1_label, False)
@@ -64,10 +63,10 @@ class Application:
     @staticmethod
     def connect_wifi():
         'Function: Connects to WiFi'
-        log("connecting to Wi-Fi SSID: " + WIFI_SSID)
+        log("connecting to Wi-Fi SSID: " + "Timothy iPhone")
         station = network.WLAN(network.STA_IF)
         station.active(True)
-        station.connect(WIFI_SSID, WIFI_PASSWORD)
+        station.connect("Timothy iPhone", "Hemligt00")
         started = time.ticks_ms()
         while (not station.isconnected() and
                time.ticks_diff(time.ticks_ms(), started) < 15_000):

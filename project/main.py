@@ -74,17 +74,27 @@ class Application:
         table = lv.table(self.tile3)
 
 
-        table.set_row_count(3)
-        table.set_column_count(2)
+        table.set_row_count(5)
+        table.set_column_count(5)
 
-        table.set_cell_value(0, 0, "City")
-        table.set_cell_value(0, 1, "Population")
+        table.set_cell_value(0, 0, "Transport type:")
+        table.set_cell_value(0, 1, "Bus")
+        table.set_cell_value(0, 2, "Train")
+        table.set_cell_value(0, 3, "Ferry")
+        table.set_cell_value(0, 4, "All")
 
-        table.set_cell_value(1, 0, "Berlin")
-        table.set_cell_value(1, 1, "3.7M")
+        table.set_cell_value(1, 0, "Departure time:")
+        table.set_cell_value(1, 1, "16:44")
 
-        table.set_cell_value(2, 0, "Paris")
-        table.set_cell_value(2, 1, "2.1M")
+        table.set_cell_value(2, 0, "Line:")
+        table.set_cell_value(2, 1, "1")
+
+        table.set_cell_value(3, 0, "Destination:")
+        table.set_cell_value(4, 0, "Status:")
+        table.set_cell_value(3, 1, "Karlskrona Centralstation")
+        table.set_cell_value(4, 1, "cancelled")
+        
+        
 
     @staticmethod
     def connect_wifi():

@@ -39,13 +39,17 @@ class Application:
         self.tileview.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
 
         self.tile1 = self.tileview.add_tile(0, 0, lv.DIR.RIGHT)
-        self.tile2 = self.tileview.add_tile(1, 0, lv.DIR.LEFT)
+        self.tile2 = self.tileview.add_tile(1, 0, lv.DIR.LEFT | lv.DIR.RIGHT)
+        self.tile3 = self.tileview.add_tile(2, 0, lv.DIR.LEFT)
 
         self.tile1_label = lv.label(self.tile1)
-        self.tile1_label.set_text("Hello Students we are group 3")
+
+        self.tile1_label.set_text("Project Blekingetrafiken\nGroup 3\nVersion: 1.1\nRamina Izadpanahi\nIslam Madwar\nLucas Rokicki\nTimothy Gillberg\nHiran Ismail")
+
         self.tile1_label.set_style_text_font(lv.font_montserrat_28, 0)
         self.tile1_label.center()
         self.apply_tile_colors(self.tile1, self.tile1_label, False)
+
 
         self.tile2_label = lv.label(self.tile2)
         self.tile2_label.set_text("Welcome to the workshop")
@@ -57,10 +61,36 @@ class Application:
             self.on_tile2_clicked, lv.EVENT.CLICKED, None
         )
 
+        #tile 3
+        self.tile3_label = lv.label(self.tile3)
+
+        self.tile3_label.set_text("Tabellsida test")
+        
+        self.tile3_label.set_style_text_font(lv.font_montserrat_28, 0)
+        self.tile3_label.center()
+        self.apply_tile_colors(self.tile3, self.tile3_label, False)
+
+        #tidstabell
+        table = lv.table(self.tile3)
+
+
+        table.set_row_count(3)
+        table.set_column_count(2)
+
+        table.set_cell_value(0, 0, "City")
+        table.set_cell_value(0, 1, "Population")
+
+        table.set_cell_value(1, 0, "Berlin")
+        table.set_cell_value(1, 1, "3.7M")
+
+        table.set_cell_value(2, 0, "Paris")
+        table.set_cell_value(2, 1, "2.1M")
+
     @staticmethod
     def connect_wifi():
         'Function: Connects to WiFi'
         log("connecting to Wi-Fi SSID: " + WIFI_SSID)
+
         station = network.WLAN(network.STA_IF)
         station.active(True)
         station.connect(WIFI_SSID, WIFI_PASSWORD)

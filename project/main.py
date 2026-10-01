@@ -43,7 +43,7 @@ class Application:
 
         self.tile1_label = lv.label(self.tile1)
 
-        self.tile1_label.set_text("Project Blekingetrafiken by Group 3." "\n",  "Version: 1.1")
+        self.tile1_label.set_text("Project Blekingetrafiken\nGroup 3\nVersion: 1.1\nRamina Izadpanahi\nIslam Madwar\nLucas Rokicki\nTimothy Gillberg\nHiran Ismail")
 
         self.tile1_label.set_style_text_font(lv.font_montserrat_28, 0)
         self.tile1_label.center()
@@ -63,6 +63,7 @@ class Application:
     def connect_wifi():
         'Function: Connects to WiFi'
         log("connecting to Wi-Fi SSID: " + WIFI_SSID)
+
         station = network.WLAN(network.STA_IF)
         station.active(True)
         station.connect(WIFI_SSID, WIFI_PASSWORD)

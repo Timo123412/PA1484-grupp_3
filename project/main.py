@@ -40,19 +40,16 @@ class Application:
 
         self.tile1 = self.tileview.add_tile(0, 0, lv.DIR.RIGHT)
         self.tile2 = self.tileview.add_tile(1, 0, lv.DIR.LEFT)
+        self.tile3 = self.tileview.add_tile(2, 0, lv.DIR.LEFT)
 
         self.tile1_label = lv.label(self.tile1)
 
-<<<<<<< HEAD
-        self.tile1_label.set_text("""Project Blekingetrafiken by Group 3
-                                    V. 1.1""")
-=======
         self.tile1_label.set_text("Project Blekingetrafiken\nGroup 3\nVersion: 1.1\nRamina Izadpanahi\nIslam Madwar\nLucas Rokicki\nTimothy Gillberg\nHiran Ismail")
->>>>>>> a3219210d1e799aa96aba27fe2591983df7cf30f
 
         self.tile1_label.set_style_text_font(lv.font_montserrat_28, 0)
         self.tile1_label.center()
         self.apply_tile_colors(self.tile1, self.tile1_label, False)
+
 
         self.tile2_label = lv.label(self.tile2)
         self.tile2_label.set_text("Welcome to the workshop")
@@ -63,6 +60,15 @@ class Application:
         self.tile2.add_event_cb(
             self.on_tile2_clicked, lv.EVENT.CLICKED, None
         )
+
+        #tile 3
+        self.tile3_label = lv.label(self.tile3)
+
+        self.tile3_label.set_text("Tabellsida test")
+        
+        self.tile3_label.set_style_text_font(lv.font_montserrat_28, 0)
+        self.tile3_label.center()
+        self.apply_tile_colors(self.tile3, self.tile3_label, False)
 
     @staticmethod
     def connect_wifi():

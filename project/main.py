@@ -70,6 +70,22 @@ class Application:
         self.tile3_label.center()
         self.apply_tile_colors(self.tile3, self.tile3_label, False)
 
+        #tidstabell
+        table = lv.table(self.tile3)
+
+
+        table.set_row_count(3)
+        table.set_column_count(2)
+
+        table.set_cell_value(0, 0, "City")
+        table.set_cell_value(0, 1, "Population")
+
+        table.set_cell_value(1, 0, "Berlin")
+        table.set_cell_value(1, 1, "3.7M")
+
+        table.set_cell_value(2, 0, "Paris")
+        table.set_cell_value(2, 1, "2.1M")
+
     @staticmethod
     def connect_wifi():
         'Function: Connects to WiFi'

@@ -38,9 +38,10 @@ class Application:
         self.tileview.set_size(600, 450)
         self.tileview.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
 
-        self.tile1 = self.tileview.add_tile(0, 0, lv.DIR.RIGHT)
+        self.tile1 = self.tileview.add_tile(0, 0, lv.DIR.RIGHT | lv.DIR.BOTTOM)
         self.tile2 = self.tileview.add_tile(1, 0, lv.DIR.LEFT | lv.DIR.RIGHT)
         self.tile3 = self.tileview.add_tile(2, 0, lv.DIR.LEFT)
+        self.tile4 = self.tileview.add_tile(0, 1, lv.DIR.TOP)
 
         self.tile1_label = lv.label(self.tile1)
 
@@ -93,7 +94,14 @@ class Application:
         table.set_cell_value(4, 0, "Status:")
         table.set_cell_value(3, 1, "Karlskrona Centralstation")
         table.set_cell_value(4, 1, "cancelled")
-        
+
+    #tile 4
+        self.tile4_label = lv.label(self.tile4)
+    
+        self.tile4_label.set_text("Settings")
+        self.tile4_label.set_style_text_font(lv.font_montserrat_28, 0)
+        self.tile4_label.center()
+        self.apply_tile_colors(self.tile4, self.tile4_label, False)
         
 
     @staticmethod

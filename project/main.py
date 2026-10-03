@@ -1,5 +1,6 @@
 import sys
 import time
+import json
 
 import lvgl as lv
 import network
@@ -31,6 +32,19 @@ class Application:
     def on_tile2_clicked(self, _event):
         self.tile2_dark = not self.tile2_dark
         self.apply_tile_colors(self.tile2, self.tile2_label, self.tile2_dark)
+
+    def on_save_button_clicked(self, _event):
+        selected_stop = self.stop_dropdown.get_selected_str()
+        selected_transport = self.transport_dropdown.get_selected_str()
+        log(f"Selected stop: {selected_stop}, Selected transport: {selected_transport}")
+        settings= {
+            "stop": selected_stop,
+            "transport": selected_transport
+        }
+        with open("settings.json","w") as f:
+            json.dump(settings,f)
+        log("Settings saved to settings.json")
+
 
     def create_ui(self):
         'Function: Creates UI'
@@ -102,7 +116,69 @@ class Application:
         self.tile4_label.set_style_text_font(lv.font_montserrat_28, 0)
         self.tile4_label.center()
         self.apply_tile_colors(self.tile4, self.tile4_label, False)
-        
+
+        self.stop_label = lv.label(self.tile4)
+        self.stop_label.set_text("Select stop:")
+        self.stop_label.set_style_text_font(lv.font_montserrat_20, 0)
+        self.apply_tile_colors(self.tile4, self.stop_label, False)
+        self.stop_label.align(
+            lv.ALIGN.TOP.MID,
+            0,
+            40
+        )
+
+        self.stop_dropdown= lv.dropdown(self.tile4)
+        self.stop_dropdown.set_width(200)
+
+        self.stop_dropdown.set_options(
+            "Campus Gräsvik\n"
+            "Karlskrona Centralstation\n"
+            "Bergåsa\n"
+        )
+        self.stop_dropdown.align(
+            lv.ALIGN.TOP.MID,
+            0,
+            80
+        )
+
+        self.transport_label = lv.label(self.tile4)
+        self.transport_label.set_text("Transport type:")
+        self.transport_label.set_style_text_font(lv.font_montserrat_20, 0)
+        self.apply_tile_colors(self.tile4, self.transport_label, False)
+        self.transport_label.align(
+            lv.ALIGN.TOP.MID,
+            0,
+            140
+        )
+        self.transport_dropdown= lv.dropdown(self.tile4)
+        self.transport_dropdown.set_width(200)
+
+        self.transport_dropdown.set_options(
+            "Bus\n"
+            "Train\n"
+            "Ferry\n"
+            "All\n"
+        )
+        self.transport_dropdown.align(
+            lv.ALIGN.TOP.MID,
+            0,
+            180
+        )
+
+        self.save_button = lv.button(self.tile4)
+        self.save_button.set_width(200)
+        self.save_button.align(
+            lv.ALIGN.TOP.MID,
+            0,
+            240
+        )
+        self.save_button_label = lv.label(self.save_button)
+        self.save_button_label.set_text("Save")
+        self.save_button_label.set_style_text_font(lv.font_montserrat_20, 0)
+        self.save_button_label.center()
+        self.save_button.add.event_cb(
+            self.on_save_button_clicked, lv.EVENT.CLICKED, None)
+
 
     @staticmethod
     def connect_wifi():
@@ -125,4 +201,4 @@ try:
 except Exception as error:
     log("FATAL: %r" % (error,))
     sys.print_exception(error)
-    raise
+raise

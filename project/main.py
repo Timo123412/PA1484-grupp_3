@@ -34,15 +34,28 @@ class Application:
         self.apply_tile_colors(self.tile2, self.tile2_label, self.tile2_dark)
 
     def on_save_button_clicked(self, _event):
-        selected_stop = self.stop_dropdown.get_selected_str()
-        selected_transport = self.transport_dropdown.get_selected_str()
-        log(f"Selected stop: {selected_stop}, Selected transport: {selected_transport}")
-        settings= {
-            "stop": selected_stop,
-            "transport": selected_transport
-        }
-        with open("settings.json","w") as f:
-            json.dump(settings,f)
+        try:
+            # LVGL writes into a supplied buffer; it does not return a string.
+            # 128 bytes accommodates every current option, including UTF-8.
+            buffer = bytearray(128)
+            self.stop_dropdown.get_selected_str(buffer, len(buffer))
+            selected_stop = buffer.split(b"\0", 1)[0].decode("utf-8")
+            self.transport_dropdown.get_selected_str(buffer, len(buffer))
+            selected_transport = buffer.split(b"\0", 1)[0].decode("utf-8")
+            settings = {
+                "stop": selected_stop,
+                "transport": selected_transport
+            }
+            with open("settings.json", "w") as stream:
+                json.dump(settings, stream)
+        except Exception as error:
+            # Keep callback errors from interrupting the LVGL task handler.
+            self.save_button_label.set_text("Save failed")
+            log("Settings save failed: %r" % (error,))
+            sys.print_exception(error)
+            return
+
+        self.save_button_label.set_text("Saved")
         log("Settings saved to settings.json")
 
 
@@ -80,7 +93,7 @@ class Application:
         self.tile3_label = lv.label(self.tile3)
 
         self.tile3_label.set_text("Tabellsida test")
-        
+
         self.tile3_label.set_style_text_font(lv.font_montserrat_28, 0)
         self.tile3_label.center()
         self.apply_tile_colors(self.tile3, self.tile3_label, False)
@@ -111,73 +124,98 @@ class Application:
 
     #tile 4
         self.tile4_label = lv.label(self.tile4)
-    
+
         self.tile4_label.set_text("Settings")
         self.tile4_label.set_style_text_font(lv.font_montserrat_28, 0)
-        self.tile4_label.center()
+        self.tile4_label.align(lv.ALIGN.TOP_MID, 0, 12)
         self.apply_tile_colors(self.tile4, self.tile4_label, False)
 
         self.stop_label = lv.label(self.tile4)
-        self.stop_label.set_text("Select stop:")
-        self.stop_label.set_style_text_font(lv.font_montserrat_20, 0)
+        self.stop_label.set_text("Select Stop:")
+        self.stop_label.set_style_text_font(lv.font_montserrat_28, 0)
         self.apply_tile_colors(self.tile4, self.stop_label, False)
         self.stop_label.align(
-            lv.ALIGN.TOP.MID,
+            lv.ALIGN.TOP_MID,
             0,
-            40
+            60
         )
 
-        self.stop_dropdown= lv.dropdown(self.tile4)
-        self.stop_dropdown.set_width(200)
+        self.stop_dropdown = lv.dropdown(self.tile4)
+        self.stop_dropdown.set_width(500)
+        self.stop_dropdown.set_height(60)
 
         self.stop_dropdown.set_options(
             "Campus Gräsvik\n"
             "Karlskrona Centralstation\n"
-            "Bergåsa\n"
+            "Bergåsa"
         )
+        self.stop_dropdown.set_selected(0)
+        self.stop_dropdown.set_style_bg_opa(lv.OPA.COVER, 0)
+        self.stop_dropdown.set_style_bg_color(lv.color_hex(0xFFFFFF), 0)
+        self.stop_dropdown.set_style_text_color(lv.color_hex(0x000000), 0)
+        self.stop_dropdown.set_style_text_font(lv.font_montserrat_28, 0)
+        # The popup is a separate LVGL object, not a dropdown part.
+        stop_list = self.stop_dropdown.get_list()
+        stop_list.set_style_text_font(lv.font_montserrat_28, 0)
+        stop_list.set_style_text_color(lv.color_hex(0x000000), 0)
+        stop_list.set_style_bg_color(lv.color_hex(0xFFFFFF), 0)
+        stop_list.set_style_bg_opa(lv.OPA.COVER, 0)
+        stop_list.set_style_pad_ver(12, 0)
+        stop_list.set_style_text_line_space(12, 0)
+        self.stop_dropdown.set_style_border_width(2, 0)
+        self.stop_dropdown.set_style_border_color(lv.color_hex(0x333333), 0)
         self.stop_dropdown.align(
-            lv.ALIGN.TOP.MID,
+            lv.ALIGN.TOP_MID,
             0,
-            80
+            100
         )
 
         self.transport_label = lv.label(self.tile4)
         self.transport_label.set_text("Transport type:")
-        self.transport_label.set_style_text_font(lv.font_montserrat_20, 0)
+        self.transport_label.set_style_text_font(lv.font_montserrat_28, 0)
         self.apply_tile_colors(self.tile4, self.transport_label, False)
         self.transport_label.align(
-            lv.ALIGN.TOP.MID,
+            lv.ALIGN.TOP_MID,
             0,
-            140
+            180
         )
         self.transport_dropdown= lv.dropdown(self.tile4)
-        self.transport_dropdown.set_width(200)
+        self.transport_dropdown.set_width(500)
+        self.transport_dropdown.set_height(60)
+        self.transport_dropdown.set_style_text_font(lv.font_montserrat_28, 0)
+        transport_list = self.transport_dropdown.get_list()
+        transport_list.set_style_text_font(lv.font_montserrat_28, 0)
+        transport_list.set_style_pad_ver(12, 0)
+        transport_list.set_style_text_line_space(12, 0)
 
         self.transport_dropdown.set_options(
             "Bus\n"
             "Train\n"
             "Ferry\n"
-            "All\n"
+            "All"
         )
+        self.transport_dropdown.set_selected(0)
         self.transport_dropdown.align(
-            lv.ALIGN.TOP.MID,
+            lv.ALIGN.TOP_MID,
             0,
-            180
+            220
         )
 
         self.save_button = lv.button(self.tile4)
-        self.save_button.set_width(200)
+        self.save_button.set_width(240)
+        self.save_button.set_height(60)
         self.save_button.align(
-            lv.ALIGN.TOP.MID,
+            lv.ALIGN.TOP_MID,
             0,
-            240
+            320
         )
         self.save_button_label = lv.label(self.save_button)
         self.save_button_label.set_text("Save")
-        self.save_button_label.set_style_text_font(lv.font_montserrat_20, 0)
+        self.save_button_label.set_style_text_font(lv.font_montserrat_28, 0)
         self.save_button_label.center()
-        self.save_button.add.event_cb(
-            self.on_save_button_clicked, lv.EVENT.CLICKED, None)
+        self.save_button.add_event_cb(
+            self.on_save_button_clicked, lv.EVENT.CLICKED, None
+        )
 
 
     @staticmethod
@@ -201,4 +239,4 @@ try:
 except Exception as error:
     log("FATAL: %r" % (error,))
     sys.print_exception(error)
-raise
+    raise

@@ -59,6 +59,25 @@ class Application:
         log("Settings saved to settings.json")
 
 
+    def on_reset_button_clicked(self, _event):
+        try:
+            with open("settings.json", "r") as stream:
+                settings = json.load(stream)
+
+            stops = ["Campus Gräsvik", "Karlskrona Centralstation", "Bergåsa"]
+            transports = ["Bus", "Train", "Ferry", "All"]
+
+            self.stop_dropdown.set_selected(stops.index(settings["stop"]))
+            self.transport_dropdown.set_selected(
+                transports.index(settings["transport"])
+            )
+
+            log("Settings reset to saved defaults")
+
+        except (OSError, ValueError, KeyError) as error:
+            log("Could not reset settings: %r" % (error,))
+
+
     def create_ui(self):
         'Function: Creates UI'
         self.tileview = lv.tileview(lv.screen_active())
@@ -216,6 +235,20 @@ class Application:
         self.save_button.add_event_cb(
             self.on_save_button_clicked, lv.EVENT.CLICKED, None
         )
+        
+        # Reset button
+        self.reset_button = lv.button(self.tile4)
+        self.reset_button.set_size(200, 50)
+        self.reset_button.align(lv.ALIGN.TOP_MID, 0, 390)
+
+        reset_label = lv.label(self.reset_button)
+        reset_label.set_text("Reset")
+        reset_label.center()
+
+        self.reset_button.add_event_cb(
+            self.on_reset_button_clicked, lv.EVENT.CLICKED, None
+        )
+
 
 
     @staticmethod

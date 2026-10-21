@@ -11,6 +11,10 @@ from debug_log import log
 from secrets import WIFI_SSID, WIFI_PASSWORD
 
 
+STOPS = ["Campus Gräsvik", "Karlskrona Centralstation", "Bergåsa"]
+TRANSPORTS = ["Bus", "Train", "Ferry", "All"]
+
+
 class Application:
     def __init__(self):
         self.display, self.touch, self.handler = start_board()
@@ -64,12 +68,10 @@ class Application:
             with open("settings.json", "r") as stream:
                 settings = json.load(stream)
 
-            stops = ["Campus Gräsvik", "Karlskrona Centralstation", "Bergåsa"]
-            transports = ["Bus", "Train", "Ferry", "All"]
 
-            self.stop_dropdown.set_selected(stops.index(settings["stop"]))
+            self.stop_dropdown.set_selected(STOPS.index(settings["stop"]))
             self.transport_dropdown.set_selected(
-                transports.index(settings["transport"])
+                TRANSPORTS.index(settings["transport"])
             )
 
             log("Settings reset to saved defaults")
@@ -163,11 +165,7 @@ class Application:
         self.stop_dropdown.set_width(500)
         self.stop_dropdown.set_height(60)
 
-        self.stop_dropdown.set_options(
-            "Campus Gräsvik\n"
-            "Karlskrona Centralstation\n"
-            "Bergåsa"
-        )
+        self.stop_dropdown.set_options("\n".join(STOPS))
         self.stop_dropdown.set_selected(0)
         self.stop_dropdown.set_style_bg_opa(lv.OPA.COVER, 0)
         self.stop_dropdown.set_style_bg_color(lv.color_hex(0xFFFFFF), 0)
@@ -207,12 +205,7 @@ class Application:
         transport_list.set_style_pad_ver(12, 0)
         transport_list.set_style_text_line_space(12, 0)
 
-        self.transport_dropdown.set_options(
-            "Bus\n"
-            "Train\n"
-            "Ferry\n"
-            "All"
-        )
+        self.transport_dropdown.set_options("\n".join(TRANSPORTS))
         self.transport_dropdown.set_selected(0)
         self.transport_dropdown.align(
             lv.ALIGN.TOP_MID,

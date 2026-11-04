@@ -11,7 +11,7 @@ from debug_log import log
 from secrets import WIFI_SSID, WIFI_PASSWORD
 
 
-STOPS = ["Campus Gräsvik", "Karlskrona Centralstation", "Bergåsa"]
+STOPS = ["Campus Gräsvik", "Karlskrona Centralstation", "Bergåsa", "Kungsmarken Center", "Marieberg"]
 TRANSPORTS = ["Bus", "Train", "Ferry", "All"]
 
 

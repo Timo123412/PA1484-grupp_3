@@ -1,6 +1,8 @@
 import sys
 import time
 import json
+import requests
+
 
 import lvgl as lv
 import network
@@ -14,6 +16,31 @@ from secrets import WIFI_SSID, WIFI_PASSWORD
 STOPS = ["Campus Gräsvik", "Karlskrona Centralstation", "Bergåsa", "Kungsmarken Center", "Marieberg"]
 TRANSPORTS = ["Bus", "Train", "Ferry", "All"]
 
+"""class Departure:
+    def __init__(self, time, line, destination, status):
+        self.time = time
+        self.line = line
+        self.destination = destination
+        self.status = status
+
+    def __repr__(self):
+        return f"Departure(time={self.time}, line={self.line}, destination={self.destination}, status= {self.status})"
+
+    def fetch_dep_data():
+        url =  "https://realtime-api.trafiklab.se/v1/departures/Blekingetrafiken?key=8b2151643bef495c80123b276b375b7c"
+        the_data = requests.get(url)
+        return the_data
+    
+    def get_stops():
+        pass
+
+    def get_dep_info(self):
+        return{
+            "time": self.time,
+            "line":self.line,
+            "destination":self.destination,
+            "status":self.status
+        }"""
 
 class Application:
     def __init__(self):
@@ -119,29 +146,30 @@ class Application:
         self.tile3_label.center()
         self.apply_tile_colors(self.tile3, self.tile3_label, False)
 
+
         #tidstabell
-        table = lv.table(self.tile3)
+        self.departure_table = lv.table(self.tile3)
 
 
-        table.set_row_count(5)
-        table.set_column_count(5)
+        self.departure_table.set_row_count(5)
+        self.departure_table.set_column_count(5)
 
-        table.set_cell_value(0, 0, "Transport type:")
-        table.set_cell_value(0, 1, "Bus")
-        table.set_cell_value(0, 2, "Train")
-        table.set_cell_value(0, 3, "Ferry")
-        table.set_cell_value(0, 4, "All")
+        self.departure_table.set_cell_value(0, 0, "Transport type:")
+        self.departure_table.set_cell_value(0, 1, "Bus")
+        self.departure_table.set_cell_value(0, 2, "Train")
+        self.departure_table.set_cell_value(0, 3, "Ferry")
+        self.departure_table.set_cell_value(0, 4, "All")
 
-        table.set_cell_value(1, 0, "Departure time:")
-        table.set_cell_value(1, 1, "16:44")
+        self.departure_table.set_cell_value(1, 0, "Departure time:")
+        self.departure_table.set_cell_value(1, 1, departure["time"])
 
-        table.set_cell_value(2, 0, "Line:")
-        table.set_cell_value(2, 1, "1")
+        self.departure_table.set_cell_value(2, 0, "Line:")
+        self.departure_table.set_cell_value(2, 1, "1")
 
-        table.set_cell_value(3, 0, "Destination:")
-        table.set_cell_value(4, 0, "Status:")
-        table.set_cell_value(3, 1, "Karlskrona Centralstation")
-        table.set_cell_value(4, 1, "cancelled")
+        self.departure_table.set_cell_value(3, 0, "Destination:")
+        self.departure_table.set_cell_value(4, 0, "Status:")
+        self.departure_table.set_cell_value(3, 1, "Karlskrona Centralstation")
+        self.departure_table.set_cell_value(4, 1, "cancelled")
 
     #tile 4
         self.tile4_label = lv.label(self.tile4)
@@ -196,6 +224,7 @@ class Application:
             0,
             180
         )
+
         self.transport_dropdown= lv.dropdown(self.tile4)
         self.transport_dropdown.set_width(500)
         self.transport_dropdown.set_height(60)
@@ -221,6 +250,7 @@ class Application:
             0,
             320
         )
+
         self.save_button_label = lv.label(self.save_button)
         self.save_button_label.set_text("Save")
         self.save_button_label.set_style_text_font(lv.font_montserrat_28, 0)
@@ -243,7 +273,6 @@ class Application:
         )
 
 
-
     @staticmethod
     def connect_wifi():
         'Function: Connects to WiFi'
@@ -258,6 +287,7 @@ class Application:
             time.sleep_ms(250)
         log("Wi-Fi connected" if station.isconnected()
             else "Wi-Fi could not connect (timeout)")
+
 
 
 try:

@@ -36,7 +36,21 @@ class Departure:
 
         return the_data.json()
 
+    @staticmethod
     def get_stops(data):
+        departures = []
+
+        for i in data:
+            departure = Departure(
+                time = i["time"]
+                line = i["line"],
+                destination = i["destination"],
+                status = i["status"]
+            )
+            
+            departures.append(departure.get_dep_info())
+        return departures
+    
 
 
 

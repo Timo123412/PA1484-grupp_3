@@ -2,6 +2,8 @@ import sys
 import time
 import json
 import requests
+import sqlite3
+
 
 
 import lvgl as lv
@@ -16,7 +18,7 @@ from secrets import WIFI_SSID, WIFI_PASSWORD
 STOPS = ["Campus Gräsvik", "Karlskrona Centralstation", "Bergåsa", "Kungsmarken Center", "Marieberg"]
 TRANSPORTS = ["Bus", "Train", "Ferry", "All"]
 
-"""class Departure:
+class Departure:
     def __init__(self, time, line, destination, status):
         self.time = time
         self.line = line
@@ -28,11 +30,21 @@ TRANSPORTS = ["Bus", "Train", "Ferry", "All"]
 
     def fetch_dep_data():
         url =  "https://realtime-api.trafiklab.se/v1/departures/Blekingetrafiken?key=8b2151643bef495c80123b276b375b7c"
-        the_data = requests.get(url)
-        return the_data
-    
-    def get_stops():
-        pass
+        the_data = requests.get(url, timeout=10)
+
+        the_data.raise_for_status()
+
+        return the_data.json()
+
+    def get_stops(data):
+
+
+
+    def make_dep_data_file():
+        data = self.fetch_dep_data()
+        with open("departure_data.json", "w") as file:
+            json.dump(data, file)
+
 
     def get_dep_info(self):
         return{
@@ -40,7 +52,8 @@ TRANSPORTS = ["Bus", "Train", "Ferry", "All"]
             "line":self.line,
             "destination":self.destination,
             "status":self.status
-        }"""
+            }
+
 
 class Application:
     def __init__(self):

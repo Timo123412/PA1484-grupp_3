@@ -15,7 +15,7 @@ from secrets import WIFI_SSID, WIFI_PASSWORD
 
 STOPS = ["Campus Gräsvik", "Karlskrona Centralstation", "Bergåsa", "Kungsmarken Center", "Marieberg"]
 TRANSPORTS = ["Bus", "Train", "Ferry", "All"]
-
+"""
 class Departure:
     def __init__(self, time, line, destination, status):
         self.time = time
@@ -26,8 +26,9 @@ class Departure:
     def __repr__(self):
         return f"Departure(time={self.time}, line={self.line}, destination={self.destination}, status= {self.status})"
 
+    @staticmethod
     def fetch_dep_data():
-        url =  "https://realtime-api.trafiklab.se/v1/departures/Blekingetrafiken?key=8b2151643bef495c80123b276b375b7c"
+        url =  "https://realtime-api.trafiklab.se/v1/departures/blekingetrafiken?key=8b2151643bef495c80123b276b375b7c"
         the_data = requests.get(url, timeout=10)
 
         the_data.raise_for_status()
@@ -75,7 +76,7 @@ class Departure:
             "destination":self.destination,
             "status":self.status
             }
-
+"""
 
 class Application:
     def __init__(self):
@@ -183,7 +184,7 @@ class Application:
 
 
         #tidstabell
-        self.departure_table = lv.table(self.tile3)
+        """self.departure_table = lv.table(self.tile3)
 
 
         self.departure_table.set_row_count(5)
@@ -204,7 +205,7 @@ class Application:
         self.departure_table.set_cell_value(3, 0, "Destination:")
         self.departure_table.set_cell_value(4, 0, "Status:")
         self.departure_table.set_cell_value(3, 1, "Karlskrona Centralstation")
-        self.departure_table.set_cell_value(4, 1, "cancelled")
+        self.departure_table.set_cell_value(4, 1, "cancelled")"""
 
     #tile 4
         self.tile4_label = lv.label(self.tile4)

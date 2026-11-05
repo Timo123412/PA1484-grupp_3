@@ -2,8 +2,6 @@ import sys
 import time
 import json
 import requests
-import sqlite3
-
 
 
 import lvgl as lv
@@ -42,7 +40,7 @@ class Departure:
 
         for i in data:
             departure = Departure(
-                time = i["time"]
+                time = i["time"],
                 line = i["line"],
                 destination = i["destination"],
                 status = i["status"]
@@ -50,14 +48,24 @@ class Departure:
             
             departures.append(departure.get_dep_info())
         return departures
-    
 
-
-
+    @staticmethod
     def make_dep_data_file():
-        data = self.fetch_dep_data()
-        with open("departure_data.json", "w") as file:
-            json.dump(data, file)
+        data = Departure.fetch_dep_data()
+        departures = Departure.get_stops(data)
+
+        with open("departure_data.json", "w", encoding="utf-8") as file:
+            json.dump(data, file, ensure_ascii=False)
+
+    @staticmethod
+    def keep_runing():
+        while True:
+            try:
+                Departure.make_dep_data_file()
+                print("Departure data is now updated!")
+            except Exception as e:
+                print(f"Error:{e}")
+            time.sleep(60) #updates data every 60 secounds
 
 
     def get_dep_info(self):

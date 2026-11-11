@@ -1,8 +1,6 @@
 import sys
 import time
 import json
-import requests
-
 
 import lvgl as lv
 import network
@@ -12,72 +10,6 @@ from debug_log import log
 
 from secrets import WIFI_SSID, WIFI_PASSWORD
 
-
-STOPS = ["Campus Gräsvik", "Karlskrona Centralstation", "Bergåsa", "Kungsmarken Center", "Marieberg"]
-TRANSPORTS = ["Bus", "Train", "Ferry", "All"]
-
-"""
-class Departure:
-    def __init__(self, time, line, destination, status):
-        self.time = time
-        self.line = line
-        self.destination = destination
-        self.status = status
-
-    def __repr__(self):
-        return f"Departure(time={self.time}, line={self.line}, destination={self.destination}, status= {self.status})"
-
-    @staticmethod
-    def fetch_dep_data():
-        url =  "https://realtime-api.trafiklab.se/v1/departures/blekingetrafiken?key=8b2151643bef495c80123b276b375b7c"
-        the_data = requests.get(url, timeout=10)
-
-        the_data.raise_for_status()
-
-        return the_data.json()
-
-    @staticmethod
-    def get_stops(data):
-        departures = []
-
-        for i in data:
-            departure = Departure(
-                time = i["time"],
-                line = i["line"],
-                destination = i["destination"],
-                status = i["status"]
-            )
-            
-            departures.append(departure.get_dep_info())
-        return departures
-
-    @staticmethod
-    def make_dep_data_file():
-        data = Departure.fetch_dep_data()
-        departures = Departure.get_stops(data)
-
-        with open("departure_data.json", "w", encoding="utf-8") as file:
-            json.dump(data, file, ensure_ascii=False)
-
-    @staticmethod
-    def keep_runing():
-        while True:
-            try:
-                Departure.make_dep_data_file()
-                print("Departure data is now updated!")
-            except Exception as e:
-                print(f"Error:{e}")
-            time.sleep(60) #updates data every 60 secounds
-
-
-    def get_dep_info(self):
-        return{
-            "time": self.time,
-            "line":self.line,
-            "destination":self.destination,
-            "status":self.status
-            }
-"""
 
 class Application:
     def __init__(self):
@@ -127,23 +59,6 @@ class Application:
         log("Settings saved to settings.json")
 
 
-    def on_reset_button_clicked(self, _event):
-        try:
-            with open("settings.json", "r") as stream:
-                settings = json.load(stream)
-
-
-            self.stop_dropdown.set_selected(STOPS.index(settings["stop"]))
-            self.transport_dropdown.set_selected(
-                TRANSPORTS.index(settings["transport"])
-            )
-
-            log("Settings reset to saved defaults")
-
-        except (OSError, ValueError, KeyError) as error:
-            log("Could not reset settings: %r" % (error,))
-
-
     def create_ui(self):
         'Function: Creates UI'
         self.tileview = lv.tileview(lv.screen_active())
@@ -183,30 +98,29 @@ class Application:
         self.tile3_label.center()
         self.apply_tile_colors(self.tile3, self.tile3_label, False)
 
-
         #tidstabell
-        self.departure_table = lv.table(self.tile3)
+        table = lv.table(self.tile3)
 
 
-        self.departure_table.set_row_count(5)
-        self.departure_table.set_column_count(5)
+        table.set_row_count(5)
+        table.set_column_count(5)
 
-        self.departure_table.set_cell_value(0, 0, "Transport type:")
-        self.departure_table.set_cell_value(0, 1, "Bus")
-        self.departure_table.set_cell_value(0, 2, "Train")
-        self.departure_table.set_cell_value(0, 3, "Ferry")
-        self.departure_table.set_cell_value(0, 4, "All")
+        table.set_cell_value(0, 0, "Transport type:")
+        table.set_cell_value(0, 1, "Bus")
+        table.set_cell_value(0, 2, "Train")
+        table.set_cell_value(0, 3, "Ferry")
+        table.set_cell_value(0, 4, "All")
 
-        self.departure_table.set_cell_value(1, 0, "Departure time:")
-        self.departure_table.set_cell_value(1, 1, departure["time"])
+        table.set_cell_value(1, 0, "Departure time:")
+        table.set_cell_value(1, 1, "16:44")
 
-        self.departure_table.set_cell_value(2, 0, "Line:")
-        self.departure_table.set_cell_value(2, 1, "1")
+        table.set_cell_value(2, 0, "Line:")
+        table.set_cell_value(2, 1, "1")
 
-        self.departure_table.set_cell_value(3, 0, "Destination:")
-        self.departure_table.set_cell_value(4, 0, "Status:")
-        self.departure_table.set_cell_value(3, 1, "Karlskrona Centralstation")
-        self.departure_table.set_cell_value(4, 1, "cancelled")
+        table.set_cell_value(3, 0, "Destination:")
+        table.set_cell_value(4, 0, "Status:")
+        table.set_cell_value(3, 1, "Karlskrona Centralstation")
+        table.set_cell_value(4, 1, "cancelled")
 
     #tile 4
         self.tile4_label = lv.label(self.tile4)
@@ -230,7 +144,11 @@ class Application:
         self.stop_dropdown.set_width(500)
         self.stop_dropdown.set_height(60)
 
-        self.stop_dropdown.set_options("\n".join(STOPS))
+        self.stop_dropdown.set_options(
+            "Campus Gräsvik\n"
+            "Karlskrona Centralstation\n"
+            "Bergåsa"
+        )
         self.stop_dropdown.set_selected(0)
         self.stop_dropdown.set_style_bg_opa(lv.OPA.COVER, 0)
         self.stop_dropdown.set_style_bg_color(lv.color_hex(0xFFFFFF), 0)
@@ -261,7 +179,6 @@ class Application:
             0,
             180
         )
-
         self.transport_dropdown= lv.dropdown(self.tile4)
         self.transport_dropdown.set_width(500)
         self.transport_dropdown.set_height(60)
@@ -271,7 +188,12 @@ class Application:
         transport_list.set_style_pad_ver(12, 0)
         transport_list.set_style_text_line_space(12, 0)
 
-        self.transport_dropdown.set_options("\n".join(TRANSPORTS))
+        self.transport_dropdown.set_options(
+            "Bus\n"
+            "Train\n"
+            "Ferry\n"
+            "All"
+        )
         self.transport_dropdown.set_selected(0)
         self.transport_dropdown.align(
             lv.ALIGN.TOP_MID,
@@ -287,26 +209,12 @@ class Application:
             0,
             320
         )
-
         self.save_button_label = lv.label(self.save_button)
         self.save_button_label.set_text("Save")
         self.save_button_label.set_style_text_font(lv.font_montserrat_28, 0)
         self.save_button_label.center()
         self.save_button.add_event_cb(
             self.on_save_button_clicked, lv.EVENT.CLICKED, None
-        )
-        
-        # Reset button
-        self.reset_button = lv.button(self.tile4)
-        self.reset_button.set_size(200, 50)
-        self.reset_button.align(lv.ALIGN.TOP_MID, 0, 390)
-
-        reset_label = lv.label(self.reset_button)
-        reset_label.set_text("Reset")
-        reset_label.center()
-
-        self.reset_button.add_event_cb(
-            self.on_reset_button_clicked, lv.EVENT.CLICKED, None
         )
 
 
@@ -324,7 +232,6 @@ class Application:
             time.sleep_ms(250)
         log("Wi-Fi connected" if station.isconnected()
             else "Wi-Fi could not connect (timeout)")
-
 
 
 try:

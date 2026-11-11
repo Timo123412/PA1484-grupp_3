@@ -15,6 +15,7 @@ from secrets import WIFI_SSID, WIFI_PASSWORD
 
 STOPS = ["Campus Gräsvik", "Karlskrona Centralstation", "Bergåsa", "Kungsmarken Center", "Marieberg"]
 TRANSPORTS = ["Bus", "Train", "Ferry", "All"]
+
 """
 class Departure:
     def __init__(self, time, line, destination, status):
@@ -184,7 +185,7 @@ class Application:
 
 
         #tidstabell
-        """self.departure_table = lv.table(self.tile3)
+        self.departure_table = lv.table(self.tile3)
 
 
         self.departure_table.set_row_count(5)
@@ -205,7 +206,7 @@ class Application:
         self.departure_table.set_cell_value(3, 0, "Destination:")
         self.departure_table.set_cell_value(4, 0, "Status:")
         self.departure_table.set_cell_value(3, 1, "Karlskrona Centralstation")
-        self.departure_table.set_cell_value(4, 1, "cancelled")"""
+        self.departure_table.set_cell_value(4, 1, "cancelled")
 
     #tile 4
         self.tile4_label = lv.label(self.tile4)

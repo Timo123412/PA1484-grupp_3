@@ -16,6 +16,7 @@ class Application:
         self.display, self.touch, self.handler = start_board()
         self.tile2_dark = False
         self.create_ui()
+        self.load_settings() 
         self.connect_wifi()
         log("student application ready")
 
@@ -58,6 +59,44 @@ class Application:
         self.save_button_label.set_text("Saved")
         log("Settings saved to settings.json")
 
+
+    def load_settings(self):
+        try:
+            with open("settings.json", "r") as stream:
+                settings = json.load(stream)
+
+            stops = [
+                "Campus Gräsvik",
+                "Karlskrona Centralstation",
+                "Bergåsa"
+            ]
+
+            transports = [
+                "Bus",
+                "Train",
+                "Ferry",
+                "All"
+            ]
+
+            selected_stop = settings.get("stop", "Campus Gräsvik")
+            selected_transport = settings.get("transport", "Bus")
+
+            if selected_stop in stops:
+                self.stop_dropdown.set_selected(stops.index(selected_stop))
+
+            if selected_transport in transports:
+                self.transport_dropdown.set_selected(
+                    transports.index(selected_transport)
+                )
+
+            log("Settings loaded from settings.json")
+
+        except OSError:
+            log("No saved settings found, using defaults")
+
+        except Exception as error:
+            log("Settings load failed: %r" % (error,))
+            sys.print_exception(error)
 
     def create_ui(self):
         'Function: Creates UI'

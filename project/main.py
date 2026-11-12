@@ -10,6 +10,18 @@ from debug_log import log
 
 from secrets import WIFI_SSID, WIFI_PASSWORD
 
+STOPS = [
+    "Campus Gräsvik",
+    "Karlskrona Centralstation",
+    "Bergåsa"
+]
+
+TRANSPORTS = [
+    "Bus",
+    "Train",
+    "Ferry",
+    "All"
+]
 
 class Application:
     def __init__(self):
@@ -60,33 +72,21 @@ class Application:
         log("Settings saved to settings.json")
 
 
+
     def load_settings(self):
         try:
             with open("settings.json", "r") as stream:
                 settings = json.load(stream)
 
-            stops = [
-                "Campus Gräsvik",
-                "Karlskrona Centralstation",
-                "Bergåsa"
-            ]
+            selected_stop = settings.get("stop", STOPS[0])
+            selected_transport = settings.get("transport", TRANSPORTS[0])
 
-            transports = [
-                "Bus",
-                "Train",
-                "Ferry",
-                "All"
-            ]
+            if selected_stop in STOPS:
+                self.stop_dropdown.set_selected(STOPS.index(selected_stop))
 
-            selected_stop = settings.get("stop", "Campus Gräsvik")
-            selected_transport = settings.get("transport", "Bus")
-
-            if selected_stop in stops:
-                self.stop_dropdown.set_selected(stops.index(selected_stop))
-
-            if selected_transport in transports:
+            if selected_transport in TRANSPORTS:
                 self.transport_dropdown.set_selected(
-                    transports.index(selected_transport)
+                    TRANSPORTS.index(selected_transport)
                 )
 
             log("Settings loaded from settings.json")

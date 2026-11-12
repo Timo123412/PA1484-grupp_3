@@ -29,6 +29,7 @@ class Application:
         self.tile2_dark = False
         self.create_ui()
         self.load_settings() 
+        self.update_timetable()
         self.connect_wifi()
         log("student application ready")
 
@@ -70,6 +71,7 @@ class Application:
 
         self.save_button_label.set_text("Saved")
         log("Settings saved to settings.json")
+        self.update_timetable()
 
 
 
@@ -97,6 +99,23 @@ class Application:
         except Exception as error:
             log("Settings load failed: %r" % (error,))
             sys.print_exception(error)
+
+    
+    def update_timetable(self):
+        # Read the selected stop and transport type
+        stop_index = self.stop_dropdown.get_selected()
+        transport_index = self.transport_dropdown.get_selected()
+
+        selected_stop = STOPS[stop_index]
+        selected_transport = TRANSPORTS[transport_index]
+
+        # Show the selected settings on Tile 3
+        self.tile3_label.set_text(
+            "Stop: " + selected_stop +
+            "\nTransport: " + selected_transport
+        )
+
+        log("Timetable settings updated")
 
     def create_ui(self):
         'Function: Creates UI'
@@ -134,7 +153,7 @@ class Application:
         self.tile3_label.set_text("Tabellsida test")
 
         self.tile3_label.set_style_text_font(lv.font_montserrat_28, 0)
-        self.tile3_label.center()
+        self.tile3_label.align(lv.ALIGN.TOP_MID, 0, 5)        
         self.apply_tile_colors(self.tile3, self.tile3_label, False)
 
         #tidstabell

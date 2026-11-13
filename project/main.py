@@ -102,7 +102,6 @@ class Application:
 
     
     def update_timetable(self):
-        # Read the selected stop and transport type
         stop_index = self.stop_dropdown.get_selected()
         transport_index = self.transport_dropdown.get_selected()
 

@@ -13,7 +13,9 @@ from secrets import WIFI_SSID, WIFI_PASSWORD
 STOPS = [
     "Campus Gräsvik",
     "Karlskrona Centralstation",
-    "Bergåsa"
+    "Bergåsa centrum",
+    "Kungsplan",
+    "Marieberg",
 ]
 
 TRANSPORTS = [
@@ -22,6 +24,11 @@ TRANSPORTS = [
     "Ferry",
     "All"
 ]
+#reseting to default settings
+DEFAULT_SETTINGS = {
+    "stop": STOPS[0],
+    "transport": TRANSPORTS[0],
+}
 
 class Application:
     def __init__(self):
@@ -75,13 +82,32 @@ class Application:
 
 
 
+    def on_reset_button_clicked(self, _event):
+        try:
+            with open("settings.json", "w") as stream:
+                json.dump(DEFAULT_SETTINGS, stream)
+        except Exception as error:
+            self.reset_button_label.set_text("Reset failed")
+            log("Settings reset failed: %r" % (error,))
+            sys.print_exception(error)
+            return
+
+        self.stop_dropdown.set_selected(STOPS.index(DEFAULT_SETTINGS["stop"]))
+        self.transport_dropdown.set_selected(
+            TRANSPORTS.index(DEFAULT_SETTINGS["transport"])
+        )
+        self.update_timetable()
+        self.save_button_label.set_text("Save")
+        self.reset_button_label.set_text("Reset done")
+        log("Default settings restored and saved to settings.json")
+
     def load_settings(self):
         try:
             with open("settings.json", "r") as stream:
                 settings = json.load(stream)
 
-            selected_stop = settings.get("stop", STOPS[0])
-            selected_transport = settings.get("transport", TRANSPORTS[0])
+            selected_stop = settings.get("stop", DEFAULT_SETTINGS["stop"])
+            selected_transport = settings.get("transport", DEFAULT_SETTINGS["transport"])
 
             if selected_stop in STOPS:
                 self.stop_dropdown.set_selected(STOPS.index(selected_stop))
@@ -201,11 +227,7 @@ class Application:
         self.stop_dropdown.set_width(500)
         self.stop_dropdown.set_height(60)
 
-        self.stop_dropdown.set_options(
-            "Campus Gräsvik\n"
-            "Karlskrona Centralstation\n"
-            "Bergåsa"
-        )
+        self.stop_dropdown.set_options("\n".join(STOPS))
         self.stop_dropdown.set_selected(0)
         self.stop_dropdown.set_style_bg_opa(lv.OPA.COVER, 0)
         self.stop_dropdown.set_style_bg_color(lv.color_hex(0xFFFFFF), 0)
@@ -257,13 +279,13 @@ class Application:
             0,
             220
         )
-
+        #save button
         self.save_button = lv.button(self.tile4)
         self.save_button.set_width(240)
         self.save_button.set_height(60)
         self.save_button.align(
             lv.ALIGN.TOP_MID,
-            0,
+            -130,
             320
         )
         self.save_button_label = lv.label(self.save_button)
@@ -272,6 +294,22 @@ class Application:
         self.save_button_label.center()
         self.save_button.add_event_cb(
             self.on_save_button_clicked, lv.EVENT.CLICKED, None
+        )
+        #reset button
+        self.reset_button = lv.button(self.tile4)
+        self.reset_button.set_width(240)
+        self.reset_button.set_height(60)
+        self.reset_button.align(
+            lv.ALIGN.TOP_MID,
+            130,
+            320
+        )
+        self.reset_button_label = lv.label(self.reset_button)
+        self.reset_button_label.set_text("Reset")
+        self.reset_button_label.set_style_text_font(lv.font_montserrat_28, 0)
+        self.reset_button_label.center()
+        self.reset_button.add_event_cb(
+            self.on_reset_button_clicked, lv.EVENT.CLICKED, None
         )
 
 

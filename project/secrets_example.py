@@ -1,2 +1,2 @@
-WIFI_SSID=""
-WIFI_PASSWORD=""
+WIFI_SSID="Hiran's iphone"
+WIFI_PASSWORD="cosmos00"

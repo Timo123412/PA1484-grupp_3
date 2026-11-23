@@ -1,6 +1,7 @@
 import sys
 import time
 import json
+import os
 
 import lvgl as lv
 import network
@@ -9,14 +10,12 @@ from board_lvgl import start_board
 from debug_log import log
 
 from secrets import WIFI_SSID, WIFI_PASSWORD
+from Dep_API import fetch_departures
 
-STOPS = [
-    "Campus Gräsvik",
-    "Karlskrona Centralstation",
-    "Bergåsa centrum",
-    "Kungsplan",
-    "Marieberg",
-]
+
+with open("stops.json", "r") as fil:
+    STOP_DATA=json.load(fil)
+STOPS=[stopp["name"] for stopp in STOP_DATA]
 
 TRANSPORTS = [
     "Bus",
@@ -27,7 +26,8 @@ TRANSPORTS = [
 #reseting to default settings
 DEFAULT_SETTINGS = {
     "stop": STOPS[0],
-    "transport": TRANSPORTS[0],
+    "stop_id": STOP_DATA[0]["id"],
+    "transport": TRANSPORTS[0]
 }
 
 class Application:
@@ -35,9 +35,10 @@ class Application:
         self.display, self.touch, self.handler = start_board()
         self.tile2_dark = False
         self.create_ui()
-        self.load_settings() 
-        self.update_timetable()
+        self.load_settings()
         self.connect_wifi()
+        self.update_timetable()
+
         log("student application ready")
 
     @staticmethod
@@ -55,42 +56,30 @@ class Application:
         self.apply_tile_colors(self.tile2, self.tile2_label, self.tile2_dark)
 
     def on_save_button_clicked(self, _event):
-        try:
-            # LVGL writes into a supplied buffer; it does not return a string.
-            # 128 bytes accommodates every current option, including UTF-8.
-            buffer = bytearray(128)
-            self.stop_dropdown.get_selected_str(buffer, len(buffer))
-            selected_stop = buffer.split(b"\0", 1)[0].decode("utf-8")
-            self.transport_dropdown.get_selected_str(buffer, len(buffer))
-            selected_transport = buffer.split(b"\0", 1)[0].decode("utf-8")
-            settings = {
-                "stop": selected_stop,
-                "transport": selected_transport
-            }
-            with open("settings.json", "w") as stream:
-                json.dump(settings, stream)
-        except Exception as error:
-            # Keep callback errors from interrupting the LVGL task handler.
-            self.save_button_label.set_text("Save failed")
-            log("Settings save failed: %r" % (error,))
-            sys.print_exception(error)
-            return
+
+        stop_index = self.stop_dropdown.get_selected()
+        transport_index = self.transport_dropdown.get_selected()
+
+        selected_stop = STOP_DATA[stop_index]
+        selected_transport = TRANSPORTS[transport_index]
+
+        settings = {
+            "stop": selected_stop["name"],
+            "stop_id": selected_stop["id"],
+            "transport": selected_transport
+        }
+
+        with open("settings.json", "w") as stream:
+            json.dump(settings, stream)
 
         self.save_button_label.set_text("Saved")
-        log("Settings saved to settings.json")
         self.update_timetable()
 
 
 
     def on_reset_button_clicked(self, _event):
-        try:
-            with open("settings.json", "w") as stream:
-                json.dump(DEFAULT_SETTINGS, stream)
-        except Exception as error:
-            self.reset_button_label.set_text("Reset failed")
-            log("Settings reset failed: %r" % (error,))
-            sys.print_exception(error)
-            return
+        with open("settings.json", "w") as stream:
+            json.dump(DEFAULT_SETTINGS, stream)
 
         self.stop_dropdown.set_selected(STOPS.index(DEFAULT_SETTINGS["stop"]))
         self.transport_dropdown.set_selected(
@@ -99,48 +88,72 @@ class Application:
         self.update_timetable()
         self.save_button_label.set_text("Save")
         self.reset_button_label.set_text("Reset done")
-        log("Default settings restored and saved to settings.json")
 
     def load_settings(self):
-        try:
+        settings = DEFAULT_SETTINGS
+        if "settings.json" in os.listdir():
             with open("settings.json", "r") as stream:
                 settings = json.load(stream)
 
-            selected_stop = settings.get("stop", DEFAULT_SETTINGS["stop"])
-            selected_transport = settings.get("transport", DEFAULT_SETTINGS["transport"])
+        selected_stop = settings.get("stop", DEFAULT_SETTINGS["stop"])
+        selected_transport = settings.get("transport", DEFAULT_SETTINGS["transport"])
 
-            if selected_stop in STOPS:
-                self.stop_dropdown.set_selected(STOPS.index(selected_stop))
+        if selected_stop in STOPS:
+            self.stop_dropdown.set_selected(STOPS.index(selected_stop))
 
-            if selected_transport in TRANSPORTS:
-                self.transport_dropdown.set_selected(
-                    TRANSPORTS.index(selected_transport)
-                )
+        if selected_transport in TRANSPORTS:
+            self.transport_dropdown.set_selected(
+                TRANSPORTS.index(selected_transport)
+            )
 
-            log("Settings loaded from settings.json")
-
-        except OSError:
-            log("No saved settings found, using defaults")
-
-        except Exception as error:
-            log("Settings load failed: %r" % (error,))
-            sys.print_exception(error)
 
     
     def update_timetable(self):
         stop_index = self.stop_dropdown.get_selected()
         transport_index = self.transport_dropdown.get_selected()
 
-        selected_stop = STOPS[stop_index]
+        stop = STOP_DATA[stop_index]
         selected_transport = TRANSPORTS[transport_index]
-
-        # Show the selected settings on Tile 3
         self.tile3_label.set_text(
-            "Stop: " + selected_stop +
+            "Stop: " + stop["name"] +
             "\nTransport: " + selected_transport
         )
+        departures = None
+        message = "Wi-Fi disconnected"
+        if network.WLAN(network.STA_IF).isconnected():
+            departures = fetch_departures(stop["id"], selected_transport)
+            message = "Network error" if departures is None else "No departures found"
+        if not departures:
+            self.table.set_row_count(2)
+            self.table.set_cell_value(1, 0, "-")
+            self.table.set_cell_value(1, 1, "-")
+            self.table.set_cell_value(1, 2, message)
+            self.table.set_cell_value(1, 3, "-")
+            return
+        self.table.set_row_count(len(departures) + 1)
+        for i, departure in enumerate(departures):
 
-        log("Timetable settings updated")
+            departure_time = (
+                departure.get("realtime")
+                or departure.get("scheduled")
+            )
+
+            time_text = (
+                departure_time[11:16]
+                if departure_time else "-"
+            )
+
+            route = departure.get("route") or {}
+
+            line = str(route.get("designation") or "-")
+            destination = str(route.get("direction") or "-")
+            status = departure.get("status", "Scheduled")
+            row = i + 1
+
+            self.table.set_cell_value(row, 0, time_text)
+            self.table.set_cell_value(row, 1, line)
+            self.table.set_cell_value(row, 2, destination)
+            self.table.set_cell_value(row, 3, status)
 
     def create_ui(self):
         'Function: Creates UI'
@@ -175,35 +188,28 @@ class Application:
         #tile 3
         self.tile3_label = lv.label(self.tile3)
 
-        self.tile3_label.set_text("Tabellsida test")
+        self.tile3_label.set_text("departure table")
 
         self.tile3_label.set_style_text_font(lv.font_montserrat_28, 0)
         self.tile3_label.align(lv.ALIGN.TOP_MID, 0, 5)        
         self.apply_tile_colors(self.tile3, self.tile3_label, False)
 
         #tidstabell
-        table = lv.table(self.tile3)
+        self.table = lv.table(self.tile3)
 
+        self.table.set_row_count(11)
+        self.table.set_column_count(4)
+        self.table.set_column_width(0, 110)
+        self.table.set_column_width(1, 65)
+        self.table.set_column_width(2, 270)
+        self.table.set_column_width(3, 135)
+        self.table.set_size(580, 330)
+        self.table.align(lv.ALIGN.TOP_MID, 0, 100)
 
-        table.set_row_count(5)
-        table.set_column_count(5)
-
-        table.set_cell_value(0, 0, "Transport type:")
-        table.set_cell_value(0, 1, "Bus")
-        table.set_cell_value(0, 2, "Train")
-        table.set_cell_value(0, 3, "Ferry")
-        table.set_cell_value(0, 4, "All")
-
-        table.set_cell_value(1, 0, "Departure time:")
-        table.set_cell_value(1, 1, "16:44")
-
-        table.set_cell_value(2, 0, "Line:")
-        table.set_cell_value(2, 1, "1")
-
-        table.set_cell_value(3, 0, "Destination:")
-        table.set_cell_value(4, 0, "Status:")
-        table.set_cell_value(3, 1, "Karlskrona Centralstation")
-        table.set_cell_value(4, 1, "cancelled")
+        self.table.set_cell_value(0, 0, "Time")
+        self.table.set_cell_value(0, 1, "Line")
+        self.table.set_cell_value(0, 2, "Destination")
+        self.table.set_cell_value(0, 3, "Status")
 
     #tile 4
         self.tile4_label = lv.label(self.tile4)
@@ -233,14 +239,14 @@ class Application:
         self.stop_dropdown.set_style_bg_color(lv.color_hex(0xFFFFFF), 0)
         self.stop_dropdown.set_style_text_color(lv.color_hex(0x000000), 0)
         self.stop_dropdown.set_style_text_font(lv.font_montserrat_28, 0)
-        # The popup is a separate LVGL object, not a dropdown part.
         stop_list = self.stop_dropdown.get_list()
-        stop_list.set_style_text_font(lv.font_montserrat_28, 0)
-        stop_list.set_style_text_color(lv.color_hex(0x000000), 0)
-        stop_list.set_style_bg_color(lv.color_hex(0xFFFFFF), 0)
-        stop_list.set_style_bg_opa(lv.OPA.COVER, 0)
-        stop_list.set_style_pad_ver(12, 0)
-        stop_list.set_style_text_line_space(12, 0)
+        if stop_list is not None:
+            stop_list.set_style_text_font(lv.font_montserrat_28, 0)
+            stop_list.set_style_text_color(lv.color_hex(0x000000), 0)
+            stop_list.set_style_bg_color(lv.color_hex(0xFFFFFF), 0)
+            stop_list.set_style_bg_opa(lv.OPA.COVER, 0)
+            stop_list.set_style_pad_ver(12, 0)
+            stop_list.set_style_text_line_space(12, 0)
         self.stop_dropdown.set_style_border_width(2, 0)
         self.stop_dropdown.set_style_border_color(lv.color_hex(0x333333), 0)
         self.stop_dropdown.align(
@@ -262,17 +268,14 @@ class Application:
         self.transport_dropdown.set_width(500)
         self.transport_dropdown.set_height(60)
         self.transport_dropdown.set_style_text_font(lv.font_montserrat_28, 0)
+        #här:
         transport_list = self.transport_dropdown.get_list()
-        transport_list.set_style_text_font(lv.font_montserrat_28, 0)
-        transport_list.set_style_pad_ver(12, 0)
-        transport_list.set_style_text_line_space(12, 0)
+        if transport_list is not None:
+            transport_list.set_style_text_font(lv.font_montserrat_28, 0)
+            transport_list.set_style_pad_ver(12, 0)
+            transport_list.set_style_text_line_space(12, 0)
 
-        self.transport_dropdown.set_options(
-            "Bus\n"
-            "Train\n"
-            "Ferry\n"
-            "All"
-        )
+        self.transport_dropdown.set_options("\n".join(TRANSPORTS))
         self.transport_dropdown.set_selected(0)
         self.transport_dropdown.align(
             lv.ALIGN.TOP_MID,

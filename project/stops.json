@@ -1,0 +1,1406 @@
+[
+  {
+    "name": "Af Chapmangymnasiet",
+    "id": "740031814"
+  },
+  {
+    "name": "Afvelsgärdevägen",
+    "id": "740031811"
+  },
+  {
+    "name": "Alamedan",
+    "id": "740031817"
+  },
+  {
+    "name": "Allatorp",
+    "id": "740011253"
+  },
+  {
+    "name": "Allatorp norra",
+    "id": "740032145"
+  },
+  {
+    "name": "Allatorps gård",
+    "id": "740010009"
+  },
+  {
+    "name": "Allsjömåla",
+    "id": "740032026"
+  },
+  {
+    "name": "Allévägen",
+    "id": "740032109"
+  },
+  {
+    "name": "Almöbron",
+    "id": "740032267"
+  },
+  {
+    "name": "Alnaryd",
+    "id": "740010013"
+  },
+  {
+    "name": "Ankaret",
+    "id": "740031823"
+  },
+  {
+    "name": "Annebergsvägen",
+    "id": "740031943"
+  },
+  {
+    "name": "Annebo",
+    "id": "740031796"
+  },
+  {
+    "name": "Attanäs",
+    "id": "740031948"
+  },
+  {
+    "name": "Augerums kyrka",
+    "id": "740031996"
+  },
+  {
+    "name": "AWA vägen",
+    "id": "740031813"
+  },
+  {
+    "name": "Backabo",
+    "id": "740031791"
+  },
+  {
+    "name": "Bastasjö",
+    "id": "740031801"
+  },
+  {
+    "name": "Benabacken",
+    "id": "740032098"
+  },
+  {
+    "name": "Berg",
+    "id": "740032069"
+  },
+  {
+    "name": "Berget",
+    "id": "740032009"
+  },
+  {
+    "name": "Bergtorpsvägen",
+    "id": "740032075"
+  },
+  {
+    "name": "Bergåsa centrum",
+    "id": "740031781"
+  },
+  {
+    "name": "Bergåsa station",
+    "id": "740001537"
+  },
+  {
+    "name": "Bjärby",
+    "id": "740032088"
+  },
+  {
+    "name": "Bjärbylund",
+    "id": "740032090"
+  },
+  {
+    "name": "Björkdalavägen",
+    "id": "740031931"
+  },
+  {
+    "name": "Björkenäs",
+    "id": "740031937"
+  },
+  {
+    "name": "Björkenäs kvarn",
+    "id": "740031938"
+  },
+  {
+    "name": "Björkeryd",
+    "id": "740032136"
+  },
+  {
+    "name": "Bokskogsvägen",
+    "id": "740032096"
+  },
+  {
+    "name": "Boråkra",
+    "id": "740032110"
+  },
+  {
+    "name": "Bostorp",
+    "id": "740011306"
+  },
+  {
+    "name": "Branthalla",
+    "id": "740031958"
+  },
+  {
+    "name": "Bredavik",
+    "id": "740031976"
+  },
+  {
+    "name": "Bredavik brygga",
+    "id": "740072446"
+  },
+  {
+    "name": "Bredäng",
+    "id": "740031939"
+  },
+  {
+    "name": "Brofästet",
+    "id": "740032147"
+  },
+  {
+    "name": "Bromålavägen",
+    "id": "740032025"
+  },
+  {
+    "name": "Brändabo",
+    "id": "740051748"
+  },
+  {
+    "name": "Bränteknuva by",
+    "id": "740032146"
+  },
+  {
+    "name": "Bränteknuva vsk",
+    "id": "740032132"
+  },
+  {
+    "name": "Bråstorp",
+    "id": "740032068"
+  },
+  {
+    "name": "Bröstorp",
+    "id": "740032067"
+  },
+  {
+    "name": "Bubbetorp",
+    "id": "740032010"
+  },
+  {
+    "name": "Byasjövägen",
+    "id": "740032070"
+  },
+  {
+    "name": "Carlandravägen",
+    "id": "740031812"
+  },
+  {
+    "name": "Carlemansvägen",
+    "id": "740031793"
+  },
+  {
+    "name": "Chapmansplan",
+    "id": "740031853"
+  },
+  {
+    "name": "Dalamad",
+    "id": "740032104"
+  },
+  {
+    "name": "Djupasund",
+    "id": "740031987"
+  },
+  {
+    "name": "Djurtorp",
+    "id": "740032385"
+  },
+  {
+    "name": "Djurtorpsvägen",
+    "id": "740032380"
+  },
+  {
+    "name": "Dragsvik",
+    "id": "740031974"
+  },
+  {
+    "name": "Drottninggatan",
+    "id": "740031815"
+  },
+  {
+    "name": "Duverum",
+    "id": "740031894"
+  },
+  {
+    "name": "E22",
+    "id": "740031908"
+  },
+  {
+    "name": "Egilslunden",
+    "id": "740031881"
+  },
+  {
+    "name": "Ekeberg",
+    "id": "740031789"
+  },
+  {
+    "name": "Ekedalsvägen",
+    "id": "740031834"
+  },
+  {
+    "name": "Ekedalsvägen",
+    "id": "740031895"
+  },
+  {
+    "name": "Ekekullen",
+    "id": "740032032"
+  },
+  {
+    "name": "Ekeryd",
+    "id": "740031911"
+  },
+  {
+    "name": "Ekerydsvägen",
+    "id": "740031897"
+  },
+  {
+    "name": "Ekholmen",
+    "id": "740031874"
+  },
+  {
+    "name": "Emmeryd",
+    "id": "740032062"
+  },
+  {
+    "name": "Enkullen",
+    "id": "740031901"
+  },
+  {
+    "name": "Esketorp",
+    "id": "740032264"
+  },
+  {
+    "name": "Fabbemåla vsk",
+    "id": "740032006"
+  },
+  {
+    "name": "Fjärdsjömåla",
+    "id": "740010344"
+  },
+  {
+    "name": "Flyerydsvägen",
+    "id": "740031913"
+  },
+  {
+    "name": "Flyetvägen",
+    "id": "740031941"
+  },
+  {
+    "name": "Fridlevstad",
+    "id": "740010377"
+  },
+  {
+    "name": "Frändatorp",
+    "id": "740031975"
+  },
+  {
+    "name": "Färmanstorp",
+    "id": "740044719"
+  },
+  {
+    "name": "Färmanstorpsv",
+    "id": "740032107"
+  },
+  {
+    "name": "Fågelmara",
+    "id": "740001062"
+  },
+  {
+    "name": "Förkärla kyrka",
+    "id": "740032287"
+  },
+  {
+    "name": "G Torhamns väg",
+    "id": "740031810"
+  },
+  {
+    "name": "Ga Riksvägen",
+    "id": "740031835"
+  },
+  {
+    "name": "Galgamarkstrappan",
+    "id": "740031888"
+  },
+  {
+    "name": "Gillabro",
+    "id": "740032134"
+  },
+  {
+    "name": "Giserydsvägen",
+    "id": "740032004"
+  },
+  {
+    "name": "Gisslevik",
+    "id": "740031953"
+  },
+  {
+    "name": "Gnistan",
+    "id": "740032265"
+  },
+  {
+    "name": "Golfbanan",
+    "id": "740032268"
+  },
+  {
+    "name": "Granholmen",
+    "id": "740032031"
+  },
+  {
+    "name": "Granitvägen",
+    "id": "740032014"
+  },
+  {
+    "name": "Granitvägen",
+    "id": "740032100"
+  },
+  {
+    "name": "Gravfältet",
+    "id": "740032266"
+  },
+  {
+    "name": "Gröna huset",
+    "id": "740031909"
+  },
+  {
+    "name": "Grönadal",
+    "id": "740032105"
+  },
+  {
+    "name": "Grönadals brygga",
+    "id": "740074573"
+  },
+  {
+    "name": "Gullaberg",
+    "id": "740031828"
+  },
+  {
+    "name": "Gullberna",
+    "id": "740072447"
+  },
+  {
+    "name": "Gullberna station",
+    "id": "740031863"
+  },
+  {
+    "name": "Gullholma",
+    "id": "740031935"
+  },
+  {
+    "name": "Gängletorp",
+    "id": "740025942"
+  },
+  {
+    "name": "Göksjöholm",
+    "id": "740032023"
+  },
+  {
+    "name": "H Martinsons väg",
+    "id": "740031809"
+  },
+  {
+    "name": "Hajvar",
+    "id": "740032430"
+  },
+  {
+    "name": "Hallarna",
+    "id": "740010555"
+  },
+  {
+    "name": "Hallarum",
+    "id": "740031961"
+  },
+  {
+    "name": "Hallarums backe",
+    "id": "740031960"
+  },
+  {
+    "name": "Hallaslättslyckan",
+    "id": "740031959"
+  },
+  {
+    "name": "Hammarsvägen",
+    "id": "740031956"
+  },
+  {
+    "name": "Hamnvägen",
+    "id": "740031944"
+  },
+  {
+    "name": "Harstorp",
+    "id": "740032137"
+  },
+  {
+    "name": "Hasslö",
+    "id": "740023345"
+  },
+  {
+    "name": "Hasslö Fabian Månsons väg",
+    "id": "740000017"
+  },
+  {
+    "name": "Hasslö Horn kyrka",
+    "id": "740010554"
+  },
+  {
+    "name": "Hasslö Näsvägen",
+    "id": "740024855"
+  },
+  {
+    "name": "Hasslöbron",
+    "id": "740024366"
+  },
+  {
+    "name": "Herrgårdsvägen",
+    "id": "740031848"
+  },
+  {
+    "name": "Hildehult",
+    "id": "740032029"
+  },
+  {
+    "name": "Hjortahammars vsk",
+    "id": "740032261"
+  },
+  {
+    "name": "Hjälmserydsv",
+    "id": "740031927"
+  },
+  {
+    "name": "Horsarydsvägen",
+    "id": "740031929"
+  },
+  {
+    "name": "Hultvägen",
+    "id": "740031868"
+  },
+  {
+    "name": "Häcken",
+    "id": "740031910"
+  },
+  {
+    "name": "Hälsovägen",
+    "id": "740031832"
+  },
+  {
+    "name": "Hässlegårdens förskola",
+    "id": "740031803"
+  },
+  {
+    "name": "Hästö",
+    "id": "740031849"
+  },
+  {
+    "name": "Hästö idrottsplats",
+    "id": "740031847"
+  },
+  {
+    "name": "Hålan",
+    "id": "740031977"
+  },
+  {
+    "name": "Högklint",
+    "id": "740032061"
+  },
+  {
+    "name": "Höryda",
+    "id": "740032066"
+  },
+  {
+    "name": "Hörydavägen",
+    "id": "740032054"
+  },
+  {
+    "name": "Idehult",
+    "id": "740032077"
+  },
+  {
+    "name": "Intagsvägen",
+    "id": "740031790"
+  },
+  {
+    "name": "Johannesberg",
+    "id": "740032060"
+  },
+  {
+    "name": "Johannishus station",
+    "id": "740010712"
+  },
+  {
+    "name": "Jämjö centrum",
+    "id": "740000333"
+  },
+  {
+    "name": "Jämjö Parkvägen",
+    "id": "740010723"
+  },
+  {
+    "name": "Jändelskolan",
+    "id": "740031962"
+  },
+  {
+    "name": "Järavägen",
+    "id": "740032169"
+  },
+  {
+    "name": "Kallingevägen",
+    "id": "740032072"
+  },
+  {
+    "name": "Karlsberg",
+    "id": "740031969"
+  },
+  {
+    "name": "Karlsgärde",
+    "id": "740032092"
+  },
+  {
+    "name": "Karlskrona Amiralen",
+    "id": "740031800"
+  },
+  {
+    "name": "Karlskrona Amiralitetstorget",
+    "id": "740040917"
+  },
+  {
+    "name": "Karlskrona Angöringen",
+    "id": "740031886"
+  },
+  {
+    "name": "Karlskrona campus Gräsvik",
+    "id": "740032188"
+  },
+  {
+    "name": "Karlskrona Centralstation",
+    "id": "740000230"
+  },
+  {
+    "name": "Karlskrona centrum",
+    "id": "740023372"
+  },
+  {
+    "name": "Karlskrona Handelshamnen",
+    "id": "740020699"
+  },
+  {
+    "name": "Karlskrona Kungsplan",
+    "id": "740020510"
+  },
+  {
+    "name": "Karlskrona Mariedal Motellet",
+    "id": "740024915"
+  },
+  {
+    "name": "Karsbo 104",
+    "id": "740078339"
+  },
+  {
+    "name": "Karsbo 405",
+    "id": "740078340"
+  },
+  {
+    "name": "Karsbo vägskäl",
+    "id": "740051767"
+  },
+  {
+    "name": "Kemivägen",
+    "id": "740032059"
+  },
+  {
+    "name": "Kestorp",
+    "id": "740010773"
+  },
+  {
+    "name": "Killevägen",
+    "id": "740031979"
+  },
+  {
+    "name": "Klakebäcksvägen",
+    "id": "740031896"
+  },
+  {
+    "name": "Knösö",
+    "id": "740031869"
+  },
+  {
+    "name": "Knösövägen",
+    "id": "740031833"
+  },
+  {
+    "name": "Konungshamn",
+    "id": "740010812"
+  },
+  {
+    "name": "Krokebro",
+    "id": "740031999"
+  },
+  {
+    "name": "Kronotorp",
+    "id": "740031794"
+  },
+  {
+    "name": "Kuleryd",
+    "id": "740032036"
+  },
+  {
+    "name": "Kungastenen",
+    "id": "740031986"
+  },
+  {
+    "name": "Kungsmarken A-huset",
+    "id": "740031826"
+  },
+  {
+    "name": "Kungsmarken B-huset",
+    "id": "740031825"
+  },
+  {
+    "name": "Kungsmarken C-huset",
+    "id": "740031824"
+  },
+  {
+    "name": "Kungsmarken centrum",
+    "id": "740031827"
+  },
+  {
+    "name": "Kvarngatan",
+    "id": "740031887"
+  },
+  {
+    "name": "Kyrkogården",
+    "id": "740031831"
+  },
+  {
+    "name": "Kättilsmåla",
+    "id": "740010884"
+  },
+  {
+    "name": "Käxelåkra",
+    "id": "740031899"
+  },
+  {
+    "name": "Lagmansgatan",
+    "id": "740031880"
+  },
+  {
+    "name": "Lallerstedts gata",
+    "id": "740031865"
+  },
+  {
+    "name": "Landsvägsgatan",
+    "id": "740031777"
+  },
+  {
+    "name": "Lejonbacken",
+    "id": "740031988"
+  },
+  {
+    "name": "Lillö",
+    "id": "740032024"
+  },
+  {
+    "name": "Lindesnäs",
+    "id": "740031783"
+  },
+  {
+    "name": "Listerby E22",
+    "id": "740024393"
+  },
+  {
+    "name": "Lokstallarna",
+    "id": "740037242"
+  },
+  {
+    "name": "Lugna Dal",
+    "id": "740032055"
+  },
+  {
+    "name": "Lyckeby centrum",
+    "id": "740000663"
+  },
+  {
+    "name": "Lyckeby Slottsbacken",
+    "id": "740032193"
+  },
+  {
+    "name": "Lyckeåborg",
+    "id": "740010999"
+  },
+  {
+    "name": "Långemålavägen",
+    "id": "740032078"
+  },
+  {
+    "name": "Långenabben",
+    "id": "740031940"
+  },
+  {
+    "name": "Långö",
+    "id": "740031879"
+  },
+  {
+    "name": "Lösen",
+    "id": "740031889"
+  },
+  {
+    "name": "Marieberg",
+    "id": "740031829"
+  },
+  {
+    "name": "Marieberg Tving",
+    "id": "740032073"
+  },
+  {
+    "name": "Mariedalsvägen",
+    "id": "740031932"
+  },
+  {
+    "name": "Mariefors",
+    "id": "740031997"
+  },
+  {
+    "name": "Mariefröjd",
+    "id": "740032002"
+  },
+  {
+    "name": "Missionshuset",
+    "id": "740032063"
+  },
+  {
+    "name": "Mjövikstrandsv",
+    "id": "740011061"
+  },
+  {
+    "name": "Mommelycke",
+    "id": "740032135"
+  },
+  {
+    "name": "Målatorps vsk",
+    "id": "740032133"
+  },
+  {
+    "name": "Måstad",
+    "id": "740032071"
+  },
+  {
+    "name": "Möckleryd",
+    "id": "740031954"
+  },
+  {
+    "name": "Möcklerydsv",
+    "id": "740031955"
+  },
+  {
+    "name": "Möcklö",
+    "id": "740031968"
+  },
+  {
+    "name": "Möcklöbron",
+    "id": "740031970"
+  },
+  {
+    "name": "Mölletorp",
+    "id": "740011100"
+  },
+  {
+    "name": "Mölleåker",
+    "id": "740031998"
+  },
+  {
+    "name": "Mörtövägen",
+    "id": "740032018"
+  },
+  {
+    "name": "N Attanäs",
+    "id": "740031936"
+  },
+  {
+    "name": "N Binga",
+    "id": "740031898"
+  },
+  {
+    "name": "N Flymen",
+    "id": "740032027"
+  },
+  {
+    "name": "N Orranäs",
+    "id": "740031934"
+  },
+  {
+    "name": "NKT Arena Karlskrona",
+    "id": "740032192"
+  },
+  {
+    "name": "NKT Verkö",
+    "id": "740031844"
+  },
+  {
+    "name": "Norra Esketorp",
+    "id": "740032262"
+  },
+  {
+    "name": "Norra Hässlegården",
+    "id": "740031802"
+  },
+  {
+    "name": "Norra Svensgöl",
+    "id": "740032042"
+  },
+  {
+    "name": "Nättraby centrum",
+    "id": "740024966"
+  },
+  {
+    "name": "Nättraby Dalby",
+    "id": "740011165"
+  },
+  {
+    "name": "Nättraby E22",
+    "id": "740023351"
+  },
+  {
+    "name": "Nättraby hörnet",
+    "id": "740000564"
+  },
+  {
+    "name": "Nättraby kyrka",
+    "id": "740025541"
+  },
+  {
+    "name": "Nättraby skola",
+    "id": "740011166"
+  },
+  {
+    "name": "Nättrabyån",
+    "id": "740032115"
+  },
+  {
+    "name": "Offamåla",
+    "id": "740032076"
+  },
+  {
+    "name": "Ordensgatan",
+    "id": "740031882"
+  },
+  {
+    "name": "Orranäs",
+    "id": "740031947"
+  },
+  {
+    "name": "Orranäs gata",
+    "id": "740031928"
+  },
+  {
+    "name": "Polhemsgatan",
+    "id": "740031779"
+  },
+  {
+    "name": "Pålycke",
+    "id": "740032064"
+  },
+  {
+    "name": "Ramdala",
+    "id": "740011210"
+  },
+  {
+    "name": "Ringö",
+    "id": "740031837"
+  },
+  {
+    "name": "Ringöbron",
+    "id": "740031864"
+  },
+  {
+    "name": "Rosenhill",
+    "id": "740031892"
+  },
+  {
+    "name": "Rosenholm",
+    "id": "740032108"
+  },
+  {
+    "name": "Roslundavägen",
+    "id": "740032099"
+  },
+  {
+    "name": "Roxtec Verkö",
+    "id": "740031842"
+  },
+  {
+    "name": "Ryd",
+    "id": "740023356"
+  },
+  {
+    "name": "Rydsvägen",
+    "id": "740032034"
+  },
+  {
+    "name": "Råbacken",
+    "id": "740031994"
+  },
+  {
+    "name": "Rödeby centrum",
+    "id": "740000521"
+  },
+  {
+    "name": "Rödeby Ek",
+    "id": "740011293"
+  },
+  {
+    "name": "Rödebyholm",
+    "id": "740023537"
+  },
+  {
+    "name": "Rödebyskolan",
+    "id": "740032013"
+  },
+  {
+    "name": "S Binga",
+    "id": "740011305"
+  },
+  {
+    "name": "S Fjärdsjömåla",
+    "id": "740032028"
+  },
+  {
+    "name": "S Fågelmara",
+    "id": "740031914"
+  },
+  {
+    "name": "S Svanhalla",
+    "id": "740031946"
+  },
+  {
+    "name": "S Svensgöl",
+    "id": "740032030"
+  },
+  {
+    "name": "S Sälleryd",
+    "id": "740032007"
+  },
+  {
+    "name": "Saltö",
+    "id": "740031870"
+  },
+  {
+    "name": "Saltö torg",
+    "id": "740031871"
+  },
+  {
+    "name": "Sanda",
+    "id": "740031984"
+  },
+  {
+    "name": "Sandbäcksmåla",
+    "id": "740032001"
+  },
+  {
+    "name": "Sandhamn",
+    "id": "740031951"
+  },
+  {
+    "name": "Sandhamns ek",
+    "id": "740031950"
+  },
+  {
+    "name": "Senoren vägskäl",
+    "id": "740011344"
+  },
+  {
+    "name": "Sibbaboda",
+    "id": "740031942"
+  },
+  {
+    "name": "Silleboda",
+    "id": "740032087"
+  },
+  {
+    "name": "Sillesåsvägen",
+    "id": "740031912"
+  },
+  {
+    "name": "Silvervägen",
+    "id": "740031806"
+  },
+  {
+    "name": "Sjukhuset huvudentrén",
+    "id": "740024365"
+  },
+  {
+    "name": "Skallatorp",
+    "id": "740031981"
+  },
+  {
+    "name": "Skearydsvägen",
+    "id": "740031930"
+  },
+  {
+    "name": "Skillinge",
+    "id": "740032089"
+  },
+  {
+    "name": "Skillingenäs",
+    "id": "740032106"
+  },
+  {
+    "name": "Skogsvägen",
+    "id": "740032033"
+  },
+  {
+    "name": "Skolhpl",
+    "id": "740032086"
+  },
+  {
+    "name": "Skällenäs",
+    "id": "740031973"
+  },
+  {
+    "name": "Skällö",
+    "id": "740031972"
+  },
+  {
+    "name": "Skärfva by",
+    "id": "740032074"
+  },
+  {
+    "name": "Skärva",
+    "id": "740032149"
+  },
+  {
+    "name": "Skärvaboda",
+    "id": "740032019"
+  },
+  {
+    "name": "Skönstavik",
+    "id": "740032091"
+  },
+  {
+    "name": "Slätthammar",
+    "id": "740032431"
+  },
+  {
+    "name": "Smedjetorpsvägen",
+    "id": "740032065"
+  },
+  {
+    "name": "Smedjevägen",
+    "id": "740032378"
+  },
+  {
+    "name": "Smedvägen",
+    "id": "740031985"
+  },
+  {
+    "name": "Sofieborgsvägen",
+    "id": "740031933"
+  },
+  {
+    "name": "Spandelstorp",
+    "id": "740031808"
+  },
+  {
+    "name": "Spandelstorpskolan",
+    "id": "740031807"
+  },
+  {
+    "name": "Sparre",
+    "id": "740031816"
+  },
+  {
+    "name": "Spjutsbygd",
+    "id": "740011462"
+  },
+  {
+    "name": "Spjutsbygds vsk",
+    "id": "740023361"
+  },
+  {
+    "name": "St Måns väg",
+    "id": "740031952"
+  },
+  {
+    "name": "Stadsträdgården",
+    "id": "740031792"
+  },
+  {
+    "name": "Stationsvägen",
+    "id": "740032017"
+  },
+  {
+    "name": "Stationsvägen Slottsbacken",
+    "id": "740031799"
+  },
+  {
+    "name": "Steneryd",
+    "id": "740011484"
+  },
+  {
+    "name": "Stengöl",
+    "id": "740011485"
+  },
+  {
+    "name": "Stora Rom",
+    "id": "740031957"
+  },
+  {
+    "name": "Strandgatan",
+    "id": "740031878"
+  },
+  {
+    "name": "Strannakullen",
+    "id": "740031980"
+  },
+  {
+    "name": "Strågeryd",
+    "id": "740032003"
+  },
+  {
+    "name": "Strömsberg",
+    "id": "740011519"
+  },
+  {
+    "name": "Strömsbergs skola",
+    "id": "740023363"
+  },
+  {
+    "name": "Stubbelycke",
+    "id": "740011526"
+  },
+  {
+    "name": "Sturkö Kvarnen",
+    "id": "740000469"
+  },
+  {
+    "name": "Sturkö kyrka",
+    "id": "740023364"
+  },
+  {
+    "name": "Sturkö skola",
+    "id": "740031978"
+  },
+  {
+    "name": "Sturköhallen",
+    "id": "740031982"
+  },
+  {
+    "name": "Sturkövägen vägskäl E22",
+    "id": "740022583"
+  },
+  {
+    "name": "Sundetvägen",
+    "id": "740031989"
+  },
+  {
+    "name": "Sunnadal",
+    "id": "740031784"
+  },
+  {
+    "name": "Svanhalla",
+    "id": "740031945"
+  },
+  {
+    "name": "Svensgöl",
+    "id": "740032041"
+  },
+  {
+    "name": "Säby",
+    "id": "740031990"
+  },
+  {
+    "name": "Sälleryd",
+    "id": "740032008"
+  },
+  {
+    "name": "Såglyckan",
+    "id": "740032095"
+  },
+  {
+    "name": "Södra Hässlegården",
+    "id": "740031805"
+  },
+  {
+    "name": "Södra Ringö",
+    "id": "740031838"
+  },
+  {
+    "name": "Tjurkö kyrka",
+    "id": "740011623"
+  },
+  {
+    "name": "Tjurkö Stora Lycke",
+    "id": "740023365"
+  },
+  {
+    "name": "Tockatorp",
+    "id": "740031983"
+  },
+  {
+    "name": "Toras väg",
+    "id": "740031841"
+  },
+  {
+    "name": "Torhamn",
+    "id": "740011636"
+  },
+  {
+    "name": "Torskors",
+    "id": "740011646"
+  },
+  {
+    "name": "Torsnäsvägen",
+    "id": "740031965"
+  },
+  {
+    "name": "Torstäva",
+    "id": "740031966"
+  },
+  {
+    "name": "Torstäva vsk",
+    "id": "740031964"
+  },
+  {
+    "name": "Trastvägen",
+    "id": "740032016"
+  },
+  {
+    "name": "Trollberget",
+    "id": "740032000"
+  },
+  {
+    "name": "Trollemåla",
+    "id": "740032005"
+  },
+  {
+    "name": "Tromtesunda",
+    "id": "740032263"
+  },
+  {
+    "name": "Tromtesunda by",
+    "id": "740073661"
+  },
+  {
+    "name": "Trummenäsvägen",
+    "id": "740031967"
+  },
+  {
+    "name": "Truseryd",
+    "id": "740031949"
+  },
+  {
+    "name": "Trädgårdsmästeriet",
+    "id": "740032383"
+  },
+  {
+    "name": "Tullparken",
+    "id": "740031877"
+  },
+  {
+    "name": "Tullskolan",
+    "id": "740031778"
+  },
+  {
+    "name": "Tving",
+    "id": "740011676"
+  },
+  {
+    "name": "Tving Bygatan",
+    "id": "740024914"
+  },
+  {
+    "name": "Tving skola",
+    "id": "740032130"
+  },
+  {
+    "name": "Tvingelshed",
+    "id": "740032035"
+  },
+  {
+    "name": "Tvingsvägen",
+    "id": "740032384"
+  },
+  {
+    "name": "Tångenvägen",
+    "id": "740032116"
+  },
+  {
+    "name": "Törnåkra",
+    "id": "740031900"
+  },
+  {
+    "name": "Uddabygd",
+    "id": "740032056"
+  },
+  {
+    "name": "Uranvägen Torskors",
+    "id": "740031859"
+  },
+  {
+    "name": "Uttorp",
+    "id": "740004348"
+  },
+  {
+    "name": "Vallby",
+    "id": "740031893"
+  },
+  {
+    "name": "Varvet",
+    "id": "740031821"
+  },
+  {
+    "name": "Verkö",
+    "id": "740031840"
+  },
+  {
+    "name": "Verkö färjeterminalen",
+    "id": "740022976"
+  },
+  {
+    "name": "Viadukten",
+    "id": "740032015"
+  },
+  {
+    "name": "Viökvarnsvägen",
+    "id": "740032021"
+  },
+  {
+    "name": "Viövägen",
+    "id": "740032022"
+  },
+  {
+    "name": "Västernäs",
+    "id": "740031971"
+  },
+  {
+    "name": "Wämöparken",
+    "id": "740032976"
+  },
+  {
+    "name": "Yasjö",
+    "id": "740032020"
+  },
+  {
+    "name": "Ängholmen",
+    "id": "740031839"
+  },
+  {
+    "name": "Ängsvägen",
+    "id": "740032101"
+  },
+  {
+    "name": "Ålycke",
+    "id": "740032382"
+  },
+  {
+    "name": "Åvägen",
+    "id": "740032097"
+  },
+  {
+    "name": "Östermarksvägen",
+    "id": "740032381"
+  },
+  {
+    "name": "Östra Torp",
+    "id": "740031795"
+  }
+]

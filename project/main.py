@@ -48,37 +48,6 @@ class Application:
             lv.color_hex(0xFFFFFF if dark else 0x000000), 0
         )
 
-    def on_save_button_clicked(self, _event):
-        stop_index = self.stop_dropdown.get_selected()
-        transport_index = self.transport_dropdown.get_selected()
-        selected_stop = STOP_DATA[stop_index]
-        selected_transport = TRANSPORTS[transport_index]
-        settings = {
-            "stop": selected_stop["name"],
-            "stop_id": selected_stop["id"],
-            "transport": selected_transport
-        }
-
-        with open("settings.json", "w") as stream:
-            json.dump(settings, stream)
-
-        self.save_button_label.set_text("Saved")
-        self.update_timetable()
-
-
-
-    def on_reset_button_clicked(self, _event):
-        with open("settings.json", "w") as stream:
-            json.dump(DEFAULT_SETTINGS, stream)
-
-        self.stop_dropdown.set_selected(STOPS.index(DEFAULT_SETTINGS["stop"]))
-        self.transport_dropdown.set_selected(
-            TRANSPORTS.index(DEFAULT_SETTINGS["transport"])
-        )
-        self.update_timetable()
-        self.save_button_label.set_text("Save")
-        self.reset_button_label.set_text("Reset done")
-
     def load_settings(self):
         settings = DEFAULT_SETTINGS
         if "settings.json" in os.listdir():
@@ -142,6 +111,33 @@ class Application:
             self.table.set_cell_value(row, 1, line)
             self.table.set_cell_value(row, 2, destination)
             self.table.set_cell_value(row, 3, status)
+
+    def on_reset_button_clicked(self, _event):
+            self.load_settings()
+            self.update_timetable()
+            self.save_button_label.set_text("Save")
+            self.reset_button_label.set_text("Reset done")
+
+    
+    def on_save_button_clicked(self, _event):
+        stop_index = self.stop_dropdown.get_selected()
+        transport_index = self.transport_dropdown.get_selected()
+        selected_stop = STOP_DATA[stop_index]
+        selected_transport = TRANSPORTS[transport_index]
+        settings = {
+            "stop": selected_stop["name"],
+            "stop_id": selected_stop["id"],
+            "transport": selected_transport
+        }
+
+        with open("settings.json", "w") as stream:
+            json.dump(settings, stream)
+
+        self.save_button_label.set_text("Saved")
+        self.update_timetable()
+
+    def on_refresh_button_clicked(self, _event):
+        self.refresh_button_label.set_text("D")
 
     def create_ui(self):
         'Function: Creates UI'
@@ -287,21 +283,21 @@ class Application:
         self.reset_button.add_event_cb(
             self.on_reset_button_clicked, lv.EVENT.CLICKED, None
         )
-
-        self.save_button = lv.button(self.tile3)
-        self.save_button.set_width(60)
-        self.save_button.set_height(60)
-        self.save_button.align(
+        # refresh button
+        self.refresh_button = lv.button(self.tile3)
+        self.refresh_button.set_width(60)
+        self.refresh_button.set_height(60)
+        self.refresh_button.align(
         lv.ALIGN.TOP_MID,
             240,
             10
         )
-        self.save_button_label = lv.label(self.save_button)
-        self.save_button_label.set_text("R")
-        self.save_button_label.set_style_text_font(lv.font_montserrat_28, 0)
-        self.save_button_label.center()
-        self.save_button.add_event_cb(
-            self.on_save_button_clicked, lv.EVENT.CLICKED, None
+        self.refresh_button_label = lv.label(self.refresh_button)
+        self.refresh_button_label.set_text("R")
+        self.refresh_button_label.set_style_text_font(lv.font_montserrat_28, 0)
+        self.refresh_button_label.center()
+        self.refresh_button.add_event_cb(
+            self.on_refresh_button_clicked, lv.EVENT.CLICKED, None
         )
 
     @staticmethod

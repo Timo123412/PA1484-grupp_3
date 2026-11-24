@@ -1,12 +1,10 @@
 import json
 import requests
-
-api_key = "8b2151643bef495c80123b276b375b7c"
+from secrets import API_KEY
 
 response = requests.get(
     "https://realtime-api.trafiklab.se/v1/stops/list",
-    params={"key": api_key},
-    timeout=120
+    params={"key": API_KEY}
 )
 
 response.raise_for_status()

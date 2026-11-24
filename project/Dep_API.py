@@ -10,7 +10,7 @@ def fetch_departures(stop_id, selected_transport="All"):
     response = None
 
     try:
-        response = requests.get(url + "?key=" + API_KEY, timeout=8)
+        response = requests.get(url + "?key=" + API_KEY)
         if response.status_code != 200:
             return []
 

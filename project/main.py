@@ -33,13 +33,10 @@ DEFAULT_SETTINGS = {
 class Application:
     def __init__(self):
         self.display, self.touch, self.handler = start_board()
-        self.tile2_dark = False
         self.create_ui()
         self.load_settings()
         self.connect_wifi()
         self.update_timetable()
-
-        log("student application ready")
 
     @staticmethod
     def apply_tile_colors(tile, label, dark):
@@ -51,18 +48,11 @@ class Application:
             lv.color_hex(0xFFFFFF if dark else 0x000000), 0
         )
 
-    def on_tile2_clicked(self, _event):
-        self.tile2_dark = not self.tile2_dark
-        self.apply_tile_colors(self.tile2, self.tile2_label, self.tile2_dark)
-
     def on_save_button_clicked(self, _event):
-
         stop_index = self.stop_dropdown.get_selected()
         transport_index = self.transport_dropdown.get_selected()
-
         selected_stop = STOP_DATA[stop_index]
         selected_transport = TRANSPORTS[transport_index]
-
         settings = {
             "stop": selected_stop["name"],
             "stop_id": selected_stop["id"],
@@ -105,8 +95,6 @@ class Application:
             self.transport_dropdown.set_selected(
                 TRANSPORTS.index(selected_transport)
             )
-
-
     
     def update_timetable(self):
         stop_index = self.stop_dropdown.get_selected()
@@ -161,42 +149,28 @@ class Application:
         self.tileview.set_size(600, 450)
         self.tileview.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
 
-        self.tile1 = self.tileview.add_tile(0, 0, lv.DIR.RIGHT | lv.DIR.BOTTOM)
+        self.tile1 = self.tileview.add_tile(0, 0, lv.DIR.RIGHT)
         self.tile2 = self.tileview.add_tile(1, 0, lv.DIR.LEFT | lv.DIR.RIGHT)
         self.tile3 = self.tileview.add_tile(2, 0, lv.DIR.LEFT)
-        self.tile4 = self.tileview.add_tile(0, 1, lv.DIR.TOP)
 
         self.tile1_label = lv.label(self.tile1)
-
-        self.tile1_label.set_text("Project Blekingetrafiken\nGroup 3\nVersion: 1.1\nRamina Izadpanahi\nIslam Madwar\nLucas Rokicki\nTimothy Gillberg\nHiran Ismail")
-
+        self.tile1_label.set_text("Project Blekingetrafiken\n" \
+        "Group 3\nVersion: 1.1\n" \
+        "Ramina Izadpanahi\n" \
+        "Islam Madwar\nLucas Rokicki\n" \
+        "Timothy Gillberg\nHiran Ismail")
         self.tile1_label.set_style_text_font(lv.font_montserrat_28, 0)
         self.tile1_label.center()
         self.apply_tile_colors(self.tile1, self.tile1_label, False)
 
-
-        self.tile2_label = lv.label(self.tile2)
-        self.tile2_label.set_text("Welcome to the workshop")
-        self.tile2_label.set_style_text_font(lv.font_montserrat_28, 0)
-        self.tile2_label.center()
-        self.apply_tile_colors(self.tile2, self.tile2_label, False)
-        self.tile2.add_flag(lv.obj.FLAG.CLICKABLE)
-        self.tile2.add_event_cb(
-            self.on_tile2_clicked, lv.EVENT.CLICKED, None
-        )
-
         #tile 3
         self.tile3_label = lv.label(self.tile3)
-
-        self.tile3_label.set_text("departure table")
-
         self.tile3_label.set_style_text_font(lv.font_montserrat_28, 0)
         self.tile3_label.align(lv.ALIGN.TOP_MID, 0, 5)        
         self.apply_tile_colors(self.tile3, self.tile3_label, False)
 
         #tidstabell
         self.table = lv.table(self.tile3)
-
         self.table.set_row_count(11)
         self.table.set_column_count(4)
         self.table.set_column_width(0, 110)
@@ -211,25 +185,24 @@ class Application:
         self.table.set_cell_value(0, 2, "Destination")
         self.table.set_cell_value(0, 3, "Status")
 
-    #tile 4
-        self.tile4_label = lv.label(self.tile4)
+    #tile 2
+        self.tile2_label = lv.label(self.tile2)
+        self.tile2_label.set_text("Settings")
+        self.tile2_label.set_style_text_font(lv.font_montserrat_28, 0)
+        self.tile2_label.align(lv.ALIGN.TOP_MID, 0, 12)
+        self.apply_tile_colors(self.tile2, self.tile2_label, False)
 
-        self.tile4_label.set_text("Settings")
-        self.tile4_label.set_style_text_font(lv.font_montserrat_28, 0)
-        self.tile4_label.align(lv.ALIGN.TOP_MID, 0, 12)
-        self.apply_tile_colors(self.tile4, self.tile4_label, False)
-
-        self.stop_label = lv.label(self.tile4)
+        self.stop_label = lv.label(self.tile2)
         self.stop_label.set_text("Select Stop:")
         self.stop_label.set_style_text_font(lv.font_montserrat_28, 0)
-        self.apply_tile_colors(self.tile4, self.stop_label, False)
+        self.apply_tile_colors(self.tile2, self.stop_label, False)
         self.stop_label.align(
             lv.ALIGN.TOP_MID,
             0,
             60
         )
 
-        self.stop_dropdown = lv.dropdown(self.tile4)
+        self.stop_dropdown = lv.dropdown(self.tile2)
         self.stop_dropdown.set_width(500)
         self.stop_dropdown.set_height(60)
 
@@ -255,16 +228,16 @@ class Application:
             100
         )
 
-        self.transport_label = lv.label(self.tile4)
+        self.transport_label = lv.label(self.tile2)
         self.transport_label.set_text("Transport type:")
         self.transport_label.set_style_text_font(lv.font_montserrat_28, 0)
-        self.apply_tile_colors(self.tile4, self.transport_label, False)
+        self.apply_tile_colors(self.tile2, self.transport_label, False)
         self.transport_label.align(
             lv.ALIGN.TOP_MID,
             0,
             180
         )
-        self.transport_dropdown= lv.dropdown(self.tile4)
+        self.transport_dropdown= lv.dropdown(self.tile2)
         self.transport_dropdown.set_width(500)
         self.transport_dropdown.set_height(60)
         self.transport_dropdown.set_style_text_font(lv.font_montserrat_28, 0)
@@ -283,7 +256,7 @@ class Application:
             220
         )
         #save button
-        self.save_button = lv.button(self.tile4)
+        self.save_button = lv.button(self.tile2)
         self.save_button.set_width(240)
         self.save_button.set_height(60)
         self.save_button.align(
@@ -299,7 +272,7 @@ class Application:
             self.on_save_button_clicked, lv.EVENT.CLICKED, None
         )
         #reset button
-        self.reset_button = lv.button(self.tile4)
+        self.reset_button = lv.button(self.tile2)
         self.reset_button.set_width(240)
         self.reset_button.set_height(60)
         self.reset_button.align(
@@ -315,6 +288,21 @@ class Application:
             self.on_reset_button_clicked, lv.EVENT.CLICKED, None
         )
 
+        self.save_button = lv.button(self.tile3)
+        self.save_button.set_width(60)
+        self.save_button.set_height(60)
+        self.save_button.align(
+        lv.ALIGN.TOP_MID,
+            240,
+            10
+        )
+        self.save_button_label = lv.label(self.save_button)
+        self.save_button_label.set_text("R")
+        self.save_button_label.set_style_text_font(lv.font_montserrat_28, 0)
+        self.save_button_label.center()
+        self.save_button.add_event_cb(
+            self.on_save_button_clicked, lv.EVENT.CLICKED, None
+        )
 
     @staticmethod
     def connect_wifi():
